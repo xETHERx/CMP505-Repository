@@ -656,12 +656,12 @@ void TerrainClass::MidPoint(int xmin, int xmax, int zmin, int zmax)
 	return;
 }
 
-bool TerrainClass::GetHeightAtPosition(float x, float z, float& height)
+bool TerrainClass::GetHeightAtPosition(int x, int z, float& height)
 {
-	if (x <= 0 && x >= 128 && z <= 0 && z >= 128) 
+	if (x <= 0 || x >= 128 || z <= 0 || z >= 128) 
 	{
 		return false;
 	}
-	height = m_heightMap[(int)z * 128 + (int)x].y;
+	height = m_heightMap[z * 129 + x].y;
 	return true;
 }

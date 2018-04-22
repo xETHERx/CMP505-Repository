@@ -50,6 +50,7 @@ public:
 	bool IsPgUpPressed();
 	bool IsPgDownPressed();
 
+	//void GetMousePositionOnScreen();
 private:
 	bool ReadKeyboard();
 	bool ReadMouse();

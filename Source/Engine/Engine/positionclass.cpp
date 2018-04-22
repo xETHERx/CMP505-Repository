@@ -348,3 +348,9 @@ void PositionClass::LookDownward(bool keydown)
 
 	return;
 }
+
+void PositionClass::Rotate(float x, float y)
+{
+	m_rotationX = y/50.0f;
+	m_rotationY = x/50.0f;
+}

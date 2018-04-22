@@ -127,7 +127,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Set the initial position of the camera.
 	cameraX = 50.0f;
-	cameraY = 2.0f;
+	cameraY = 100.0f;
 	cameraZ = 50.0f;
 
 	m_Camera->SetPosition(cameraX, cameraY, cameraZ);
@@ -671,6 +671,7 @@ bool ApplicationClass::Frame()
 	
 	bool result;
 
+	Collisiondetect();
 
 	// Read the user input.
 	result = m_Input->Frame();
@@ -729,36 +730,29 @@ bool ApplicationClass::HandleInput(float frameTime)
 {
 	bool keyDown, result;
 	float posX, posY, posZ, rotX, rotY, rotZ;
-
+	int mousex, mousey;
+	//D3DXVECTOR3 camPos, boxPos1, boxPos2;
 
 	// Set the frame time for calculating the updated position.
 	m_Position->SetFrameTime(frameTime);
 
+	//m_Position->GetPosition(camPos.x, camPos.y, camPos.z);
+	//m_pos1->GetPosition(boxPos1.x, boxPos1.y, boxPos1.z);
+	//m_pos2->GetPosition(boxPos2.x, boxPos2.y, boxPos2.z);
+
 	// Handle the input.
-	keyDown = m_Input->IsLeftPressed();
-	m_Position->TurnLeft(keyDown);
+	if (!xp && !xn && !zp && !zn && !xp2 && !xn2 && !zp2 && !zn2)
+	{
+		keyDown = m_Input->IsUpPressed();
+		m_Position->MoveForward(keyDown);
 
-	keyDown = m_Input->IsRightPressed();
-	m_Position->TurnRight(keyDown);
+		keyDown = m_Input->IsDownPressed();
+		m_Position->MoveBackward(keyDown);
 
-	keyDown = m_Input->IsUpPressed();
-	m_Position->MoveForward(keyDown);
+		m_Input->GetMouseLocation(mousex, mousey);
+		m_Position->Rotate((float)mousex, (float)mousey);
 
-	keyDown = m_Input->IsDownPressed();
-	m_Position->MoveBackward(keyDown);
-
-	keyDown = m_Input->IsAPressed();
-	m_Position->MoveUpward(keyDown);
-
-	keyDown = m_Input->IsZPressed();
-	m_Position->MoveDownward(keyDown);
-
-	keyDown = m_Input->IsPgUpPressed();
-	m_Position->LookUpward(keyDown);
-
-	keyDown = m_Input->IsPgDownPressed();
-	m_Position->LookDownward(keyDown);
-	
+	}
 	// Get the view point position/rotation.
 	m_Position->GetPosition(posX, posY, posZ);
 	m_Position->GetRotation(rotX, rotY, rotZ);

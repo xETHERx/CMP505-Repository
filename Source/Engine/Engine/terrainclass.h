@@ -48,7 +48,7 @@ public:
 	bool GenerateHeightMap(ID3D11Device* device, bool keydown);
 	int  GetIndexCount();
 
-	bool GetHeightAtPosition(float, float, float&);
+	bool GetHeightAtPosition(int, int, float&);
 private:
 	bool LoadHeightMap(char*);
 	void NormalizeHeightMap();

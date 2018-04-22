@@ -38,6 +38,7 @@ public:
 	void LookUpward(bool);
 	void LookDownward(bool);
 
+	void Rotate(float, float);
 private:
 	float m_positionX, m_positionY, m_positionZ;
 	float m_rotationX, m_rotationY, m_rotationZ;
