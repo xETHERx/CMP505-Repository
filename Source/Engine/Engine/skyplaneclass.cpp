@@ -33,9 +33,9 @@ bool SkyPlaneClass::Initialize(ID3D11Device* device, WCHAR* textureFilename1, WC
 
 	// Set the sky plane parameters.
 	skyPlaneResolution = 10;
-	skyPlaneWidth = 10.0f;
-	skyPlaneTop = 0.5f;
-	skyPlaneBottom = 0.0f;
+	skyPlaneWidth = 2000.0f;
+	skyPlaneTop = 500.5f;
+	skyPlaneBottom = -100.0f;
 	textureRepeat = 4;
 
 	// Set the brightness of the clouds.

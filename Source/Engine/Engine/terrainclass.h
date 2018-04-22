@@ -49,6 +49,12 @@ public:
 	int  GetIndexCount();
 
 	bool GetHeightAtPosition(int, int, float&);
+
+	/*bool Render(ID3D11DeviceContext*, 
+		int, D3DXMATRIX, D3DXMATRIX,
+		D3DXMATRIX, D3DXVECTOR4, D3DXVECTOR4,
+		D3DXVECTOR3, ID3D11ShaderResourceView*);*/
+
 private:
 	bool LoadHeightMap(char*);
 	void NormalizeHeightMap();
@@ -60,6 +66,13 @@ private:
 	void RenderBuffers(ID3D11DeviceContext*);
 	
 	void MidPoint(int, int, int, int);
+
+	////bool SetShaderParameters(ID3D11DeviceContext*,
+	//	D3DXMATRIX, D3DXMATRIX, D3DXMATRIX,
+	//	D3DXVECTOR4, D3DXVECTOR4, D3DXVECTOR3, 
+	//	ID3D11ShaderResourceView*);
+	
+
 private:
 	bool m_terrainGeneratedToggle;
 	int m_terrainWidth, m_terrainHeight;

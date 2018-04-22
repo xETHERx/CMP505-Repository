@@ -352,7 +352,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	}
 
 	// Initialize the bitmap object.
-	result = m_Minimap->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/minimap.dds", 256, 256);
+	result = m_Minimap->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/minimap.dds", 258, 258);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the Minimap object.", L"Error", MB_OK);
@@ -365,7 +365,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	result = m_Minibox01->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Box.dds", 256, 256);
+	result = m_Minibox01->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Box.dds", 8, 8);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_Minibox01 object.", L"Error", MB_OK);
@@ -379,7 +379,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	result = m_Minibox02->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Box.dds", 256, 256);
+	result = m_Minibox02->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Box.dds", 8, 8);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_Minibox02 object.", L"Error", MB_OK);
@@ -394,7 +394,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	result = m_Player->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/playericon.dds", 256, 256);
+	result = m_Player->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Playericon.dds", 10, 10);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_Player object.", L"Error", MB_OK);
@@ -480,9 +480,43 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	{
 		return false;
 	}
-	m_pos2->SetPosition(65,0,55);
+	m_pos2->SetPosition(65,0,57);
+
+	//////////////////////////
+	//sound            //
+	///////////////////////////
+
+	// Initialize the Direct3D object.
+
+	m_sound = new SoundClass;
+	if (!m_sound)
+	{
+		return false;
+	}
+
+	result = m_sound->Initialize(hwnd, "../Engine/data/pushbox.wav");
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize m_sound.", L"Error", MB_OK);
+		return false;
+	}
+
+	m_sound2 = new SoundClass;
+	if (!m_sound2)
+	{
+		return false;
+	}
+
+	result = m_sound2->Initialize(hwnd, "../Engine/data/Victory.wav");
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize m_sound2.", L"Error", MB_OK);
+		return false;
+	}
+
 
 	return true;
+
 
 }
 
@@ -490,6 +524,19 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 void ApplicationClass::Shutdown()
 {
+	if (m_sound)
+	{
+		m_sound->Shutdown();
+		delete m_sound;
+		m_sound = 0;
+	}
+
+	if (m_sound2)
+	{
+		m_sound2->Shutdown();
+		delete m_sound2;
+		m_sound2 = 0;
+	}
 
 	if(m_pos1)
 	{
@@ -731,28 +778,31 @@ bool ApplicationClass::HandleInput(float frameTime)
 	bool keyDown, result;
 	float posX, posY, posZ, rotX, rotY, rotZ;
 	int mousex, mousey;
-	//D3DXVECTOR3 camPos, boxPos1, boxPos2;
+	D3DXVECTOR3 camPos, boxPos1, boxPos2;
 
 	// Set the frame time for calculating the updated position.
 	m_Position->SetFrameTime(frameTime);
 
-	//m_Position->GetPosition(camPos.x, camPos.y, camPos.z);
-	//m_pos1->GetPosition(boxPos1.x, boxPos1.y, boxPos1.z);
-	//m_pos2->GetPosition(boxPos2.x, boxPos2.y, boxPos2.z);
+	m_Position->GetPosition(camPos.x, camPos.y, camPos.z);
+	m_pos1->GetPosition(boxPos1.x, boxPos1.y, boxPos1.z);
+	m_pos2->GetPosition(boxPos2.x, boxPos2.y, boxPos2.z);
 
 	// Handle the input.
-	if (!xp && !xn && !zp && !zn && !xp2 && !xn2 && !zp2 && !zn2)
+	if (!(camPos.x - boxPos1.x <= 4 && camPos.x - boxPos1.x >= -4
+		&& camPos.z - boxPos1.z <= 4 && camPos.z - boxPos1.z >= -4)&&
+		!(camPos.x - boxPos2.x <= 4 && camPos.x - boxPos2.x >= -4
+			&& camPos.z - boxPos2.z <= 4 && camPos.z - boxPos2.z >= -4))
 	{
 		keyDown = m_Input->IsUpPressed();
 		m_Position->MoveForward(keyDown);
-
-		keyDown = m_Input->IsDownPressed();
-		m_Position->MoveBackward(keyDown);
 
 		m_Input->GetMouseLocation(mousex, mousey);
 		m_Position->Rotate((float)mousex, (float)mousey);
 
 	}
+		keyDown = m_Input->IsDownPressed();
+		m_Position->MoveBackward(keyDown);
+
 	// Get the view point position/rotation.
 	m_Position->GetPosition(posX, posY, posZ);
 	m_Position->GetRotation(rotX, rotY, rotZ);
@@ -950,13 +1000,12 @@ bool ApplicationClass::RenderGraphics()
 	//We now also get the ortho matrix from the D3DClass 
 	//for 2D rendering.We will pass this in instead of the projection matrix.
 
-	m_Direct3D->GetOrthoMatrix(orthoMatrix);
-	//The Z buffer is turned off before we do any 2D rendering.
 
 	////////////////////
 	//render minimap
 	////////////////////
 	m_Direct3D->GetOrthoMatrix(orthoMatrix);
+	//The Z buffer is turned off before we do any 2D rendering.
 
 	m_Direct3D->TurnZBufferOff();
 
@@ -976,8 +1025,6 @@ bool ApplicationClass::RenderGraphics()
 	//minimap_boxobj           //
 	/////////////////////////////
 
-	m_Direct3D->GetOrthoMatrix(orthoMatrix);
-
 	////////////////////
 	//Minimap_boxes //
 	////////////////////
@@ -995,7 +1042,6 @@ bool ApplicationClass::RenderGraphics()
 		return false;
 	}
 
-	m_Direct3D->TurnZBufferOn();
 
 	//box02_minimap
 
@@ -1013,8 +1059,9 @@ bool ApplicationClass::RenderGraphics()
 	}
 
 	//player_minimap
-
-	result = m_Player->Render(m_Direct3D->GetDeviceContext(), (cameraPos.x * 2) + 10 + m_width - 300, (cameraPos.z * 2) + 10 + m_height - 1025);
+	m_Position->GetPosition(cameraPos.x, cameraPos.y, cameraPos.z);
+	result = m_Player->Render(m_Direct3D->GetDeviceContext(), cameraPos.x * 2 + 4 + m_width - 300, cameraPos.z * 2 + 4 + m_height - 1025);
+	//result = m_Player->Render(m_Direct3D->GetDeviceContext(), cameraPos.x * 2 + 10, cameraPos.z * 2 + 10);
 	if (!result)
 	{
 		return false;
@@ -1028,6 +1075,7 @@ bool ApplicationClass::RenderGraphics()
 	}
 
 
+	m_Direct3D->TurnZBufferOn();
 
 
 	if (m_win) {

@@ -20,7 +20,8 @@
 #include <mmsystem.h>
 #include <dsound.h>
 #include <stdio.h>
-
+//#include <fstream>
+//using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Class name: SoundClass
@@ -50,7 +51,7 @@ public:
 	SoundClass(const SoundClass&);
 	~SoundClass();
 
-	bool Initialize(HWND);
+	bool Initialize(HWND, char*);
 	void Shutdown();
 
 	bool PlayWaveFile();
@@ -60,8 +61,6 @@ private:
 
 	bool LoadWaveFile(char*, IDirectSoundBuffer8**);
 	void ShutdownWaveFile(IDirectSoundBuffer8**);
-
-	
 
 private:
 	IDirectSound8 * m_DirectSound;

@@ -49,6 +49,8 @@ void TerrainShaderClass::Shutdown()
 	return;
 }
 
+//The Render function now takes a texture resource as input and sends it into the SetShaderParameter function before calling RenderShader.
+
 
 bool TerrainShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, 
 								D3DXMATRIX projectionMatrix, D3DXVECTOR4 ambientColor, D3DXVECTOR4 diffuseColor, D3DXVECTOR3 lightDirection)

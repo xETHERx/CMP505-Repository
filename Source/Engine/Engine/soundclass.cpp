@@ -9,7 +9,6 @@ SoundClass::SoundClass()
 	m_DirectSound = 0;
 	m_primaryBuffer = 0;
 	m_secondaryBuffer1 = 0;
-	
 }
 
 
@@ -23,7 +22,7 @@ SoundClass::~SoundClass()
 }
 
 
-bool SoundClass::Initialize(HWND hwnd)
+bool SoundClass::Initialize(HWND hwnd, char* fileName)
 {
 	bool result;
 
@@ -36,7 +35,7 @@ bool SoundClass::Initialize(HWND hwnd)
 	}
 
 	// Load a wave audio file onto a secondary buffer.
-	result = LoadWaveFile("../Engine/data/sound01.wav", &m_secondaryBuffer1);
+	result = LoadWaveFile(fileName, &m_secondaryBuffer1);
 	if(!result)
 	{
 		return false;
@@ -145,6 +144,7 @@ void SoundClass::ShutdownDirectSound()
 bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuffer)
 {
 	int error;
+	//ofstream fout;
 	FILE* filePtr;
 	unsigned int count;
 	WaveHeaderType waveFileHeader;
@@ -159,6 +159,9 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 
 	// Open the wave file in binary.
 	error = fopen_s(&filePtr, filename, "rb");
+	//fout.open("sound-error.txt");
+	//fout << error;
+	//fout.close();
 	if(error != 0)
 	{
 		return false;
@@ -168,6 +171,7 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 	count = fread(&waveFileHeader, sizeof(waveFileHeader), 1, filePtr);
 	if(count != 1)
 	{
+		MessageBox(NULL, L"234", L"Error", MB_OK);
 		return false;
 	}
 
@@ -175,6 +179,7 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 	if((waveFileHeader.chunkId[0] != 'R') || (waveFileHeader.chunkId[1] != 'I') || 
 	   (waveFileHeader.chunkId[2] != 'F') || (waveFileHeader.chunkId[3] != 'F'))
 	{
+		MessageBox(NULL, L"1.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -182,6 +187,7 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 	if((waveFileHeader.format[0] != 'W') || (waveFileHeader.format[1] != 'A') ||
 	   (waveFileHeader.format[2] != 'V') || (waveFileHeader.format[3] != 'E'))
 	{
+		MessageBox(NULL, L"2.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -189,30 +195,35 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 	if((waveFileHeader.subChunkId[0] != 'f') || (waveFileHeader.subChunkId[1] != 'm') ||
 	   (waveFileHeader.subChunkId[2] != 't') || (waveFileHeader.subChunkId[3] != ' '))
 	{
+		MessageBox(NULL, L"3.", L"Error", MB_OK);
 		return false;
 	}
 
 	// Check that the audio format is WAVE_FORMAT_PCM.
 	if(waveFileHeader.audioFormat != WAVE_FORMAT_PCM)
 	{
+		MessageBox(NULL, L"4.", L"Error", MB_OK);
 		return false;
 	}
 
 	// Check that the wave file was recorded in stereo format.
 	if(waveFileHeader.numChannels != 2)
 	{
+		MessageBox(NULL, L"5.", L"Error", MB_OK);
 		return false;
 	}
 
 	// Check that the wave file was recorded at a sample rate of 44.1 KHz.
-	if(waveFileHeader.sampleRate != 44100)
-	{
-		return false;
-	}
+	//if(waveFileHeader.sampleRate != 44100)
+	//{
+		//MessageBox(NULL, L"6.", L"Error", MB_OK);
+		//return false;
+	//}
 
 	// Ensure that the wave file was recorded in 16 bit format.
 	if(waveFileHeader.bitsPerSample != 16)
 	{
+		MessageBox(NULL, L"7.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -220,6 +231,7 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 	if((waveFileHeader.dataChunkId[0] != 'd') || (waveFileHeader.dataChunkId[1] != 'a') ||
 	   (waveFileHeader.dataChunkId[2] != 't') || (waveFileHeader.dataChunkId[3] != 'a'))
 	{
+		MessageBox(NULL, L"8.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -244,6 +256,7 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 	result = m_DirectSound->CreateSoundBuffer(&bufferDesc, &tempBuffer, NULL);
 	if(FAILED(result))
 	{
+		MessageBox(NULL, L"9.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -251,6 +264,7 @@ bool SoundClass::LoadWaveFile(char* filename, IDirectSoundBuffer8** secondaryBuf
 	result = tempBuffer->QueryInterface(IID_IDirectSoundBuffer8, (void**)&*secondaryBuffer);
 	if(FAILED(result))
 	{
+		MessageBox(NULL, L"105.", L"Error", MB_OK);
 		return false;
 	}
 
