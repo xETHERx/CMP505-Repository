@@ -53,17 +53,18 @@ bool TerrainClass::InitializeTerrain(ID3D11Device* device, int terrainWidth, int
 
 
 			if (i == 0 && j == 0)
-				m_heightMap[index].y = rand();
+				m_heightMap[index].y = rand() % 11;
 			if (i == 128 && j == 0)
-				m_heightMap[index].y = rand();
+				m_heightMap[index].y = rand() % 11;
 			if (i == 0 && j == 128)
-				m_heightMap[index].y = rand();
+				m_heightMap[index].y = rand() % 11;
 			if (i == 128 && j == 128)
-				m_heightMap[index].y = rand();
+				m_heightMap[index].y = rand() % 11;
 
 		}
 	}
 
+	MidPoint(0, 128, 0, 128);
 
 	//even though we are generating a flat terrain, we still need to normalise it. 
 	// Calculate the normals for the terrain data.
@@ -638,12 +639,12 @@ void TerrainClass::RenderBuffers(ID3D11DeviceContext* deviceContext)
 void TerrainClass::MidPoint(int xmin, int xmax, int zmin, int zmax)
 {
 
-	m_heightMap[(zmin + zmax) / 2 * 128 + xmin].y = (m_heightMap[zmin * 128 + xmin].y + m_heightMap[zmax * 128 + xmin].y) / 2;
-	m_heightMap[(zmin + zmax) / 2 * 128 + xmax].y = (m_heightMap[zmin * 128 + xmax].y + m_heightMap[zmax * 128 + xmax].y) / 2;
-	m_heightMap[zmin * 128 + (xmin + xmax) / 2].y = (m_heightMap[zmin * 128 + xmin].y + m_heightMap[zmin * 128 + xmax].y) / 2;
-	m_heightMap[zmax * 128 + (xmin + xmax) / 2].y = (m_heightMap[zmax * 128 + xmin].y + m_heightMap[zmax * 128 + xmax].y) / 2;
+	m_heightMap[(zmin + zmax) / 2 * 129 + xmin].y = (m_heightMap[zmin * 129 + xmin].y + m_heightMap[zmax * 129 + xmin].y) / 2;
+	m_heightMap[(zmin + zmax) / 2 * 129 + xmax].y = (m_heightMap[zmin * 129 + xmax].y + m_heightMap[zmax * 129 + xmax].y) / 2;
+	m_heightMap[zmin * 129 + (xmin + xmax) / 2].y = (m_heightMap[zmin * 129 + xmin].y + m_heightMap[zmin * 129 + xmax].y) / 2;
+	m_heightMap[zmax * 129 + (xmin + xmax) / 2].y = (m_heightMap[zmax * 129 + xmin].y + m_heightMap[zmax * 129 + xmax].y) / 2;
 
-	m_heightMap[(zmin + zmax) / 2 * 128 + (xmin + xmax) / 2].y = (m_heightMap[zmin * 128 + xmin].y + m_heightMap[zmax * 128 + xmin].y + m_heightMap[zmin * 128 + xmax].y + m_heightMap[zmax * 128 + xmax].y) / 4;
+	m_heightMap[(zmin + zmax) / 2 * 129 + (xmin + xmax) / 2].y = (m_heightMap[zmin * 129 + xmin].y + m_heightMap[zmax * 129 + xmin].y + m_heightMap[zmin * 129 + xmax].y + m_heightMap[zmax * 129 + xmax].y) / 4;
 
 	if (!(xmax - xmin <= 2 && zmax - zmin <= 2)) 
 	{
@@ -657,6 +658,10 @@ void TerrainClass::MidPoint(int xmin, int xmax, int zmin, int zmax)
 
 bool TerrainClass::GetHeightAtPosition(float x, float z, float& height)
 {
+	if (x <= 0 && x >= 128 && z <= 0 && z >= 128) 
+	{
+		return false;
+	}
 	height = m_heightMap[(int)z * 128 + (int)x].y;
 	return true;
 }

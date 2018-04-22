@@ -10,6 +10,7 @@ ModelClass::ModelClass()
 	m_indexBuffer = 0;
 	m_Texture = 0;
 	m_model = 0;
+	m_vertexCount = 0;
 }
 
 
@@ -259,7 +260,7 @@ bool ModelClass::LoadModel(char* filename)
 	ifstream fin;
 	char input;
 	int i;
-
+	//m_vertexCount = 0;
 
 	// Open the model file.
 	fin.open(filename);

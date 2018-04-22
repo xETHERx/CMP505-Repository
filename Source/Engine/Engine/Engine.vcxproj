@@ -147,6 +147,10 @@
     <None Include="skydome.vs" />
     <None Include="skyplane.ps" />
     <None Include="skyplane.vs" />
+    <None Include="terrain.ps" />
+    <None Include="terrain.vs" />
+    <None Include="texture.ps" />
+    <None Include="texture.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

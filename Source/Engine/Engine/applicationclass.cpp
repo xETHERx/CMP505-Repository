@@ -10,6 +10,7 @@ ApplicationClass::ApplicationClass()
 	m_Direct3D = 0;//
 	m_Camera = 0;//
 	m_Terrain = 0;//
+	m_TerrainShader = 0;//
 	m_ColorShader = 0;//
 	m_Timer = 0;//
 	m_Position = 0;//
@@ -33,13 +34,16 @@ ApplicationClass::ApplicationClass()
 	m_Minimap = 0;//
 	m_BitMap = 0;//
 
-	m_sound = 0;//
-	m_sound2 = 0;//
+	m_sound = 0;
+	m_sound2 = 0;
 
 	m_TextureShader = 0;//
 
 	m_Light = 0;//
-	m_lightshader = 0;
+	m_lightshader = 0;//
+
+	m_pos1 = 0;//
+	m_pos2 = 0;//
 
 	boxcollisionX = false;
 	boxcollisionZ = false;
@@ -124,7 +128,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	// Set the initial position of the camera.
 	cameraX = 50.0f;
 	cameraY = 2.0f;
-	cameraZ = -7.0f;
+	cameraZ = 50.0f;
 
 	m_Camera->SetPosition(cameraX, cameraY, cameraZ);
 
@@ -140,6 +144,18 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the terrain object.", L"Error", MB_OK);
+		return false;
+	}
+
+	m_TerrainShader = new TerrainShaderClass;
+	if (!m_TerrainShader)
+	{
+		return false;
+	}
+
+	result = m_TerrainShader->Initialize(m_Direct3D->GetDevice(), hwnd);
+	if (!result)
+	{
 		return false;
 	}
 
@@ -400,10 +416,22 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	////////////////////////////////
 	// Initialize the model object.
 	////////////////////////////////
+	m_model = new ModelClass;
+	if (!m_model)
+	{
+		return false;
+	}
+
 	result = m_model->Initialize(m_Direct3D->GetDevice(), "../Engine/data/cube.txt", L"../Engine/data/Box.dds");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
+		return false;
+	}
+
+	m_model2 = new ModelClass;
+	if (!m_model2)
+	{
 		return false;
 	}
 
@@ -424,9 +452,9 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	}
 
 	// Initialize the light object.
-	m_Light->SetAmbientColor(0.05f, 0.05f, 0.05f, 1.0f);
-	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-	m_Light->SetDirection(0.0f, 0.0f, 0.75f);
+	m_Light->SetAmbientColor(0.3f, 0.3f, 0.3f, 1.0f);
+	m_Light->SetDiffuseColor(0.5f, 0.5f, 0.5f, 0.5f);
+	m_Light->SetDirection(0.0f, -1.0f, -1.0f);
 
 	m_lightshader = new LightShaderClass;
 	if (!m_lightshader)
@@ -440,6 +468,19 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
+	m_pos1 = new PositionClass;
+	if (!m_pos1)
+	{
+		return false;
+	}
+	m_pos1->SetPosition(65,0,65);
+
+	m_pos2 = new PositionClass;
+	if (!m_pos2)
+	{
+		return false;
+	}
+	m_pos2->SetPosition(65,0,55);
 
 	return true;
 
@@ -449,6 +490,18 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 void ApplicationClass::Shutdown()
 {
+
+	if(m_pos1)
+	{
+		delete m_pos1;
+		m_pos1 = 0;
+	}
+
+	if (m_pos2)
+	{
+		delete m_pos2;
+		m_pos2 = 0;
+	}
 
 	// Release the light object.
 	if (m_Light)
@@ -577,6 +630,13 @@ void ApplicationClass::Shutdown()
 		m_Terrain->Shutdown();
 		delete m_Terrain;
 		m_Terrain = 0;
+	}
+
+	if (m_TerrainShader)
+	{
+		m_TerrainShader->Shutdown();
+		delete m_TerrainShader;
+		m_TerrainShader = 0;
 	}
 
 	// Release the camera object.

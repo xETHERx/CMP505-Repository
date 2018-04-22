@@ -90,10 +90,10 @@
     <ClCompile Include="textureshaderclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="terrainshaderclass.cpp">
+    <ClCompile Include="terrainclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="terrainclass.cpp">
+    <ClCompile Include="terrainshaderclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,10 +170,10 @@
     <ClInclude Include="textureshaderclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="terrainshaderclass.h">
+    <ClInclude Include="terrainclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="terrainclass.h">
+    <ClInclude Include="terrainshaderclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -206,6 +206,18 @@
       <Filter>Shader Files</Filter>
     </None>
     <None Include="light.ps">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="texture.ps">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="texture.vs">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="terrain.ps">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="terrain.vs">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>
