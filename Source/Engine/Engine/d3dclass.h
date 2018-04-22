@@ -53,6 +53,12 @@ public:
 	void TurnOnAlphaBlending();
 	void TurnOffAlphaBlending();
 
+	//skydome
+	void TurnOnCulling();
+	void TurnOffCulling();
+	//Cloud
+	void EnableSecondBlendState();
+
 private:
 	bool m_vsync_enabled;
 	int m_videoCardMemory;
@@ -71,6 +77,10 @@ private:
 	ID3D11DepthStencilState* m_depthDisabledStencilState;
 	ID3D11BlendState* m_alphaEnableBlendingState;
 	ID3D11BlendState* m_alphaDisableBlendingState;
+
+	//New rasterizer state for turning off back face culling.
+
+	ID3D11RasterizerState* m_rasterStateNoCulling;
 };
 
 #endif

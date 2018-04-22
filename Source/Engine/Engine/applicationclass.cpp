@@ -17,8 +17,12 @@ ApplicationClass::ApplicationClass()
 	m_Cpu = 0;
 	m_FontShader = 0;
 	m_Text = 0;
+
 	m_SkyDome = 0;
 	m_SkyDomeShader = 0;
+
+	m_SkyPlane = 0;
+	m_SkyPlaneShader = 0;
 }
 
 
@@ -208,8 +212,10 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	//Create and initialize both the SkyDomeClass
 	//and SkyDomeShaderClass objects here.
-
+	/////////////////////////////////////
 	// Create the sky dome object.
+	/////////////////////////////////////
+
 	m_SkyDome = new SkyDomeClass;
 	if (!m_SkyDome)
 	{
@@ -238,14 +244,59 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		MessageBox(hwnd, L"Could not initialize the sky dome shader object.", L"Error", MB_OK);
 		return false;
 	}
+	///////////////////////////////////////
+	// Create the sky plane object.
+	////////////////////////////////////////
 
+	m_SkyPlane = new SkyPlaneClass;
+	if (!m_SkyPlane)
+	{
+		return false;
+	}
 
+	// Initialize the sky plane object.
+	result = m_SkyPlane->Initialize(m_Direct3D->GetDevice(), L"../Engine/data/cloud001.dds", L"../Engine/data/cloud002.dds");
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the sky plane object.", L"Error", MB_OK);
+		return false;
+	}
+
+	// Create the sky plane shader object.
+	m_SkyPlaneShader = new SkyPlaneShaderClass;
+	if (!m_SkyPlaneShader)
+	{
+		return false;
+	}
+
+	// Initialize the sky plane shader object.
+	result = m_SkyPlaneShader->Initialize(m_Direct3D->GetDevice(), hwnd);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the sky plane shader object.", L"Error", MB_OK);
+		return false;
+	}
 	return true;
 }
 
 
 void ApplicationClass::Shutdown()
 {
+	// Release the sky plane shader object.
+	if (m_SkyPlaneShader)
+	{
+		m_SkyPlaneShader->Shutdown();
+		delete m_SkyPlaneShader;
+		m_SkyPlaneShader = 0;
+	}
+
+	// Release the sky plane object.
+	if (m_SkyPlane)
+	{
+		m_SkyPlane->Shutdown();
+		delete m_SkyPlane;
+		m_SkyPlane = 0;
+	}
 	// Release the sky dome shader object.
 	if (m_SkyDomeShader)
 	{
@@ -395,6 +446,9 @@ bool ApplicationClass::Frame()
 		return false;
 	}
 
+	// Do the sky plane frame processing.
+	m_SkyPlane->Frame();
+
 	// Render the graphics.
 	result = RenderGraphics();
 	if(!result)
@@ -511,11 +565,22 @@ bool ApplicationClass::RenderGraphics()
 	// Turn back face culling back on.
 	m_Direct3D->TurnOnCulling();
 
+	// Enable additive blending so the clouds blend with the sky dome color.
+	m_Direct3D->EnableSecondBlendState();
+
+	// Render the sky plane using the sky plane shader.
+	m_SkyPlane->Render(m_Direct3D->GetDeviceContext());
+	m_SkyPlaneShader->Render(m_Direct3D->GetDeviceContext(), m_SkyPlane->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
+		m_SkyPlane->GetCloudTexture1(), m_SkyPlane->GetCloudTexture2(), m_SkyPlane->GetTranslation(0), m_SkyPlane->GetTranslation(1),
+		m_SkyPlane->GetTranslation(2), m_SkyPlane->GetTranslation(3), m_SkyPlane->GetBrightness());
+
+	// Turn off blending.
 	// Turn the Z buffer back on.
 	m_Direct3D->TurnZBufferOn();
 
 	// Reset the world matrix.
 	m_Direct3D->GetWorldMatrix(worldMatrix);
+
 
 
 	// Render the terrain buffers.
@@ -549,53 +614,12 @@ bool ApplicationClass::RenderGraphics()
 
 	// Present the rendered scene to the screen.
 	m_Direct3D->EndScene();
+
+
 	/////////////////////////////
 	//recover                  //
 	/////////////////////////////
 
-	//////////
-	//skybox//
-	//////////
-
-	// Get the position of the camera.
-	cameraPosition = m_Camera->GetPosition();
-
-	// Translate the sky dome to be centered around the camera position.
-	D3DXMatrixTranslation(&worldMatrix, cameraPosition.x, cameraPosition.y, cameraPosition.z);
-	//Before rendering the sky dome we turn off both back face culling and the Z buffer.
-
-	// Turn off back face culling.
-	m_Direct3D->TurnOffCulling();
-
-	// Turn off the Z buffer.
-	m_Direct3D->TurnZBufferOff();
-	//We then render the sky dome using the sky dome shader.
-
-	// Render the sky dome using the sky dome shader.
-	m_SkyDome->Render(m_Direct3D->GetDeviceContext());
-	m_SkyDomeShader->Render(m_Direct3D->GetDeviceContext(), m_SkyDome->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_SkyDome->GetApexColor(), m_SkyDome->GetCenterColor());
-	//Once rendering is complete we turn back face culling and the Z buffer on again and resume rendering the rest of the scene as normal.
-
-	// Turn back face culling back on.
-	m_Direct3D->TurnOnCulling();
-
-	// Turn the Z buffer back on.
-	m_Direct3D->TurnZBufferOn();
-
-	// Reset the world matrix.
-	m_Direct3D->GetWorldMatrix(worldMatrix);
-
-	// Render the terrain buffers.
-	m_Terrain->Render(m_Direct3D->GetDeviceContext());
-
-	// Render the terrain using the terrain shader.
-	result = m_TerrainShader->Render(m_Direct3D->GetDeviceContext(), m_Terrain->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(), m_Light->GetDirection());
-	if (!result)
-	{
-		return false;
-	}
 
 	////////////////
 	D3DXMATRIX rotationMatrix, translationMatrix, scaleMatrix;
@@ -660,24 +684,7 @@ bool ApplicationClass::RenderGraphics()
 	}
 
 	m_Direct3D->GetWorldMatrix(worldMatrix);
-	////////////////
-	//render cloud//
-	////////////////
-
-	// Enable additive blending so the clouds blend with the sky dome color.
-	m_Direct3D->EnableSecondBlendState();
-
-	// Render the sky plane using the sky plane shader.
-	m_SkyPlane->Render(m_Direct3D->GetDeviceContext());
-	m_SkyPlaneShader->Render(m_Direct3D->GetDeviceContext(), m_SkyPlane->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_SkyPlane->GetCloudTexture1(), m_SkyPlane->GetCloudTexture2(), m_SkyPlane->GetTranslation(0), m_SkyPlane->GetTranslation(1),
-		m_SkyPlane->GetTranslation(2), m_SkyPlane->GetTranslation(3), m_SkyPlane->GetBrightness());
-
-	// Turn off the Z buffer to begin all 2D rendering.
-	m_Direct3D->TurnZBufferOff();
-
-	// Turn on the alpha blending before rendering the text.
-	m_Direct3D->TurnOnAlphaBlending();
+	
 
 	// Render the text user interface elements.
 	result = m_Text->Render(m_Direct3D->GetDeviceContext(), m_FontShader, worldMatrix, orthoMatrix);
@@ -686,18 +693,7 @@ bool ApplicationClass::RenderGraphics()
 		return false;
 	}
 
-	// Turn off alpha blending after rendering the text.
-	m_Direct3D->TurnOffAlphaBlending();
 
-	// Turn the Z buffer back on now that all 2D rendering has completed.
-	m_Direct3D->TurnZBufferOn();
-
-#
-	//We now also get the ortho matrix from the D3DClass 
-	//for 2D rendering.We will pass this in instead of the projection matrix.
-
-	m_Direct3D->GetOrthoMatrix(orthoMatrix);
-	//The Z buffer is turned off before we do any 2D rendering.
 
 	////////////////////
 	//render minimap
@@ -1009,11 +1005,11 @@ void ApplicationClass::Collisiondetect()
 		m_sound2->PlayWaveFile();
 
 	}
-
-
+  
 	return;
+	
 }
 
 
-	return true;
-}
+
+
