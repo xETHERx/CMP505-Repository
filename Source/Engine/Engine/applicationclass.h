@@ -33,6 +33,8 @@ const float SCREEN_NEAR = 0.1f;
 #include "skyplaneclass.h"
 #include "skyplaneshaderclass.h"
 #include "modelclass.h"
+#include "bitmapclass.h"
+#include "soundclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ApplicationClass
@@ -74,6 +76,8 @@ private:
 	SkyPlaneShaderClass* m_SkyPlaneShader;
 
 	ModelClass *m_model, *m_model2;
+
+	BitmapClass* m_Minimap, *m_Minibox01, *m_Minibox02,*m_Player;
 
 	bool boxcollisionX, boxcollisionZ;
 	bool xp, xn, zp, zn, xp2, xn2, zp2, zn2;

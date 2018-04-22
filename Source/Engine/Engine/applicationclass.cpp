@@ -303,12 +303,80 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		MessageBox(hwnd, L"Could not initialize the sky plane shader object.", L"Error", MB_OK);
 		return false;
 	}
+
+	///////////////////////////
+	// Create the Minimap objects.
+	///////////////////////////
+
+	m_Minimap = new BitmapClass;
+	if (!m_Minimap)
+	{
+		return false;
+	}
+
+	// Initialize the bitmap object.
+	result = m_Minimap->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/minimap.dds", 256, 256);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the Minimap object.", L"Error", MB_OK);
+		return false;
+	}
+	 //minimap_box01
+	m_Minibox01 = new BitmapClass;
+	if (!m_Minibox01)
+	{
+		return false;
+	}
+
+	result = m_Minibox01->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Box.dds", 256, 256);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the m_Minibox01 object.", L"Error", MB_OK);
+		return false;
+	}
+
+	//minimap_box02
+	m_Minibox02 = new BitmapClass;
+	if (!m_Minibox02)
+	{
+		return false;
+	}
+
+	result = m_Minibox02->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Box.dds", 256, 256);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the m_Minibox02 object.", L"Error", MB_OK);
+		return false;
+	}
+
+
+	//minimap_Player
+	m_Player = new BitmapClass;
+	if (!m_Player)
+	{
+		return false;
+	}
+
+	result = m_Player->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/playericon_1.dds", 256, 256);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the m_Player object.", L"Error", MB_OK);
+		return false;
+	}
+
 	return true;
 }
 
 
 void ApplicationClass::Shutdown()
 {
+	// Release the Minimap objects.
+	if (m_Minimap)
+	{
+		m_Minimap->Shutdown();
+		delete m_Minimap;
+		m_Minimap = 0;
+	}
 	// Release the sky plane shader object.
 	if (m_SkyPlaneShader)
 	{
