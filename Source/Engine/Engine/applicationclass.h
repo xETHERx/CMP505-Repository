@@ -21,6 +21,7 @@ const float SCREEN_NEAR = 0.1f;
 #include "d3dclass.h"
 #include "cameraclass.h"
 #include "terrainclass.h"
+#include "terrainshaderclass.h"
 #include "colorshaderclass.h"
 #include "timerclass.h"
 #include "positionclass.h"
@@ -35,6 +36,9 @@ const float SCREEN_NEAR = 0.1f;
 #include "modelclass.h"
 #include "bitmapclass.h"
 #include "soundclass.h"
+#include "textureshaderclass.h"
+#include "lightclass.h"
+#include "lightshaderclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ApplicationClass
@@ -61,6 +65,7 @@ private:
 	D3DClass* m_Direct3D;
 	CameraClass* m_Camera;
 	TerrainClass* m_Terrain;
+	TerrainShaderClass* m_TerrainShader;
 	ColorShaderClass* m_ColorShader;
 	TimerClass* m_Timer;
 	PositionClass* m_Position, *m_pos1, *m_pos2;
@@ -77,13 +82,19 @@ private:
 
 	ModelClass *m_model, *m_model2;
 
-	BitmapClass* m_Minimap, *m_Minibox01, *m_Minibox02,*m_Player;
+	BitmapClass* m_Minimap, *m_Minibox01, *m_Minibox02,*m_Player, *m_BitMap;
+
+	SoundClass* m_sound, *m_sound2;
+	TextureShaderClass* m_TextureShader;
+	LightClass* m_Light;
+	LightShaderClass* m_lightshader;
 
 	bool boxcollisionX, boxcollisionZ;
 	bool xp, xn, zp, zn, xp2, xn2, zp2, zn2;
 	bool m_win;
 	float movement, movement2;
 	int m_width, m_height;
+	D3DXMATRIX baseViewMatrix;
 };
 
 #endif

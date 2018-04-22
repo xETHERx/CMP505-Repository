@@ -9,6 +9,7 @@ SoundClass::SoundClass()
 	m_DirectSound = 0;
 	m_primaryBuffer = 0;
 	m_secondaryBuffer1 = 0;
+	
 }
 
 
@@ -42,12 +43,12 @@ bool SoundClass::Initialize(HWND hwnd)
 	}
 
 	// Play the wave file now that it has been loaded.
-	result = PlayWaveFile();
+	/*result = PlayWaveFile();
 	if(!result)
 	{
 		return false;
 	}
-
+*/
 	return true;
 }
 

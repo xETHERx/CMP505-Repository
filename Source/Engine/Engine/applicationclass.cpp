@@ -31,9 +31,12 @@ ApplicationClass::ApplicationClass()
 	m_Minibox02 = 0;
 	m_Player = 0;
 	m_Minimap = 0;
+	m_BitMap = 0;
 
 	m_sound = 0;
 	m_sound2 = 0;
+
+	m_TextureShader = 0;
 
 	boxcollisionX = false;
 	boxcollisionZ = false;
@@ -65,7 +68,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 {
 	bool result;
 	float cameraX, cameraY, cameraZ;
-	D3DXMATRIX baseViewMatrix;
+
 	char videoCard[128];
 	int videoMemory;
 
@@ -361,6 +364,18 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_Player object.", L"Error", MB_OK);
+		return false;
+	}
+
+	m_TextureShader = new TextureShaderClass;
+	if (!m_TextureShader)
+	{
+		return false;
+	}
+
+	result = m_TextureShader->Initialize(m_Direct3D->GetDevice(), hwnd);
+	if (!result)
+	{
 		return false;
 	}
 
@@ -687,7 +702,6 @@ bool ApplicationClass::RenderGraphics()
 		return false;
 	}
 
-	////////////////
 	D3DXMATRIX rotationMatrix, translationMatrix, scaleMatrix;
 	D3DXVECTOR3 boxPos1, boxPos2, cameraPos;
 
@@ -750,6 +764,7 @@ bool ApplicationClass::RenderGraphics()
 	}
 
 	m_Direct3D->GetWorldMatrix(worldMatrix);
+
 	////////////////
 	//render cloud//
 	////////////////
@@ -792,6 +807,8 @@ bool ApplicationClass::RenderGraphics()
 	////////////////////
 	//render minimap
 	////////////////////
+	m_Direct3D->GetOrthoMatrix(orthoMatrix);
+
 	m_Direct3D->TurnZBufferOff();
 
 	result = m_Minimap->Render(m_Direct3D->GetDeviceContext(), m_width - 300, m_height - 1025);
@@ -813,7 +830,7 @@ bool ApplicationClass::RenderGraphics()
 	m_Direct3D->GetOrthoMatrix(orthoMatrix);
 
 	////////////////////
-	//render minimap  //
+	//Minimap_boxes //
 	////////////////////
 
 	result = m_Minibox01->Render(m_Direct3D->GetDeviceContext(), (boxPos1.x * 2) + 4 + m_width - 300, (boxPos1.z * 2) + 4 + m_height - 1025);
@@ -869,7 +886,7 @@ bool ApplicationClass::RenderGraphics()
 		m_Direct3D->TurnZBufferOff();
 
 		// Put the bitmap vertex and index buffers on the graphics pipeline to prepare them for drawing.
-		result = m_Bitmap->Render(m_Direct3D->GetDeviceContext(), m_width / 2 - 400, m_height / 2 - 400);
+		result = m_BitMap->Render(m_Direct3D->GetDeviceContext(), m_width / 2 - 400, m_height / 2 - 400);
 		if (!result)
 		{
 			return false;
@@ -877,8 +894,8 @@ bool ApplicationClass::RenderGraphics()
 		//Once the vertex / index buffers are prepared we draw them using the texture shader.Notice we send in the orthoMatrix instead of the projectionMatrix for rendering 2D.Due note also that if your view matrix is changing you will need to create a default one for 2D rendering and use it instead of the regular view matrix.In this tutorial using the regular view matrix is fine as the camera in this tutorial is stationary.
 
 		// Render the bitmap with the texture shader.
-		result = m_TextureShader->Render(m_Direct3D->GetDeviceContext(), m_Bitmap->GetIndexCount(),
-			worldMatrix, baseViewMatrix, orthoMatrix, m_Bitmap->GetTexture());
+		result = m_TextureShader->Render(m_Direct3D->GetDeviceContext(), m_BitMap->GetIndexCount(),
+			worldMatrix, baseViewMatrix, orthoMatrix, m_BitMap->GetTexture());
 		if (!result)
 		{
 			return false;

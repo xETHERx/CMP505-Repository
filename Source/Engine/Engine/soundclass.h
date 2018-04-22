@@ -53,6 +53,7 @@ public:
 	bool Initialize(HWND);
 	void Shutdown();
 
+	bool PlayWaveFile();
 private:
 	bool InitializeDirectSound(HWND);
 	void ShutdownDirectSound();
@@ -60,12 +61,13 @@ private:
 	bool LoadWaveFile(char*, IDirectSoundBuffer8**);
 	void ShutdownWaveFile(IDirectSoundBuffer8**);
 
-	bool PlayWaveFile();
+	
 
 private:
-	IDirectSound8* m_DirectSound;
+	IDirectSound8 * m_DirectSound;
 	IDirectSoundBuffer* m_primaryBuffer;
 	IDirectSoundBuffer8* m_secondaryBuffer1;
+	
 };
 
 #endif

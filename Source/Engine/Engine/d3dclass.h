@@ -83,6 +83,9 @@ ID3D11RasterizerState* m_rasterStateNoCulling;
 
 	//the new blend state pointer.
 ID3D11BlendState* m_alphaBlendState2;
+
+//render 2d imange_ new depth stencil state for 2D drawing.
+ID3D11DepthStencilState* m_depthDisabledStencilState;
 };
 
 #endif

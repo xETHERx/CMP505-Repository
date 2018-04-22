@@ -51,9 +51,6 @@
     <ClCompile Include="systemclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="terrainclass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="textclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,6 +58,42 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="timerclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skydomeclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skydomeshaderclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skyplaneshaderclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skyplaneclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="modelclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bitmapclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="soundclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lightclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lightshaderclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="textureshaderclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="terrainshaderclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="terrainclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,9 +131,6 @@
     <ClInclude Include="systemclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="terrainclass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="textclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -108,6 +138,42 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="timerclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skydomeclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skydomeshaderclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skyplaneclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skyplaneshaderclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="modelclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bitmapclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="soundclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lightclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lightshaderclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="textureshaderclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="terrainclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="terrainshaderclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -122,6 +188,24 @@
       <Filter>Shader Files</Filter>
     </None>
     <None Include="font.vs">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="skydome.ps">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="skydome.vs">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="skyplane.ps">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="skyplane.vs">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="light.vs">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="light.ps">
       <Filter>Shader Files</Filter>
     </None>
   </ItemGroup>
