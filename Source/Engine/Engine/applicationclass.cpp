@@ -18,7 +18,7 @@ ApplicationClass::ApplicationClass()
 	m_FontShader = 0;
 	m_Text = 0;
 }
-//sss
+
 
 ApplicationClass::ApplicationClass(const ApplicationClass& other)
 {
