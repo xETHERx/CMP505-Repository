@@ -31,14 +31,14 @@ ApplicationClass::ApplicationClass()
 	m_Minibox02 = 0;//
 	m_Player = 0;//
 	m_Minimap = 0;//
-	m_BitMap = 0;
+	m_BitMap = 0;//
 
-	m_sound = 0;
-	m_sound2 = 0;
+	m_sound = 0;//
+	m_sound2 = 0;//
 
-	m_TextureShader = 0;
+	m_TextureShader = 0;//
 
-	m_Light = 0;
+	m_Light = 0;//
 	m_lightshader = 0;
 
 	boxcollisionX = false;
@@ -136,7 +136,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	}
 
 	// Initialize the terrain object.
-	result = m_Terrain->Initialize(m_Direct3D->GetDevice());
+	result = m_Terrain->InitializeTerrain(m_Direct3D->GetDevice(), 129, 129);
 	if(!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the terrain object.", L"Error", MB_OK);
@@ -311,9 +311,23 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	///////////////////////////
+	/////////////////////////////
 	// Create the Minimap objects.
-	///////////////////////////
+	/////////////////////////////
+
+	m_BitMap = new BitmapClass;
+	if (!m_BitMap)
+	{
+		return false;
+	}
+
+	// Initialize the bitmap object.
+	result = m_BitMap->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/youwin.dds", 256, 256);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the m_BitMap object.", L"Error", MB_OK);
+		return false;
+	}
 
 	m_Minimap = new BitmapClass;
 	if (!m_Minimap)
@@ -364,7 +378,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	result = m_Player->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/playericon_1.dds", 256, 256);
+	result = m_Player->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/playericon.dds", 256, 256);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_Player object.", L"Error", MB_OK);
@@ -383,12 +397,89 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
+	////////////////////////////////
+	// Initialize the model object.
+	////////////////////////////////
+	result = m_model->Initialize(m_Direct3D->GetDevice(), "../Engine/data/cube.txt", L"../Engine/data/Box.dds");
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
+		return false;
+	}
+
+	result = m_model2->Initialize(m_Direct3D->GetDevice(), "../Engine/data/cube.txt", L"../Engine/data/Box.dds");
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the model2 object.", L"Error", MB_OK);
+		return false;
+	}
+
+	
+	// Initialize the light object.
+	// Create the light object.
+	m_Light = new LightClass;
+	if (!m_Light)
+	{
+		return false;
+	}
+
+	// Initialize the light object.
+	m_Light->SetAmbientColor(0.05f, 0.05f, 0.05f, 1.0f);
+	m_Light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
+	m_Light->SetDirection(0.0f, 0.0f, 0.75f);
+
+	m_lightshader = new LightShaderClass;
+	if (!m_lightshader)
+	{
+		return false;
+	}
+
+	result = m_lightshader->Initialize(m_Direct3D->GetDevice(), hwnd);
+	if (!result)
+	{
+		return false;
+	}
+
+
 	return true;
+
 }
+
 
 
 void ApplicationClass::Shutdown()
 {
+
+	// Release the light object.
+	if (m_Light)
+	{
+		delete m_Light;
+		m_Light = 0;
+	}
+
+	// Release the light shader object.
+	if (m_lightshader)
+	{
+		m_lightshader->Shutdown();
+		delete m_lightshader;
+		m_lightshader = 0;
+	}
+
+	// Release the model object.
+	if (m_model)
+	{
+		m_model->Shutdown();
+		delete m_model;
+		m_model = 0;
+	}
+
+	if (m_model2)
+	{
+		m_model2->Shutdown();
+		delete m_model2;
+		m_model2 = 0;
+	}
+
 	// Release the Minimap objects.
 	if (m_Minimap)
 	{

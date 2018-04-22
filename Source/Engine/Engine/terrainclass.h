@@ -48,6 +48,7 @@ public:
 	bool GenerateHeightMap(ID3D11Device* device, bool keydown);
 	int  GetIndexCount();
 
+	bool GetHeightAtPosition(float, float, float&);
 private:
 	bool LoadHeightMap(char*);
 	void NormalizeHeightMap();
@@ -58,6 +59,7 @@ private:
 	void ShutdownBuffers();
 	void RenderBuffers(ID3D11DeviceContext*);
 	
+	void MidPoint(int, int, int, int);
 private:
 	bool m_terrainGeneratedToggle;
 	int m_terrainWidth, m_terrainHeight;

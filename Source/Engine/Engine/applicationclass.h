@@ -8,7 +8,7 @@
 /////////////
 // GLOBALS //
 /////////////
-const bool FULL_SCREEN = true;
+const bool FULL_SCREEN = false;
 const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
@@ -26,7 +26,7 @@ const float SCREEN_NEAR = 0.1f;
 #include "timerclass.h"
 #include "positionclass.h"
 #include "fpsclass.h"
-#include "cpuclass.h"
+#include "cpuclass.h"  
 #include "fontshaderclass.h"
 #include "textclass.h"
 #include "skydomeclass.h"
@@ -87,7 +87,7 @@ private:
 	SoundClass* m_sound, *m_sound2;
 	TextureShaderClass* m_TextureShader;
 	LightClass* m_Light;
-	LightShaderClass* m_lightshader;
+	LightShaderClass*m_lightshader;
 
 	bool boxcollisionX, boxcollisionZ;
 	bool xp, xn, zp, zn, xp2, xn2, zp2, zn2;
