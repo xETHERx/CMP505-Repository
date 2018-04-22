@@ -28,7 +28,11 @@ const float SCREEN_NEAR = 0.1f;
 #include "cpuclass.h"
 #include "fontshaderclass.h"
 #include "textclass.h"
-
+#include "skydomeclass.h"
+#include "skydomeshaderclass.h"
+#include "skyplaneclass.h"
+#include "skyplaneshaderclass.h"
+#include "modelclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ApplicationClass
@@ -48,6 +52,8 @@ private:
 	bool HandleInput(float);
 	bool RenderGraphics();
 
+	void Collisiondetect();
+
 private:
 	InputClass* m_Input;
 	D3DClass* m_Direct3D;
@@ -55,11 +61,25 @@ private:
 	TerrainClass* m_Terrain;
 	ColorShaderClass* m_ColorShader;
 	TimerClass* m_Timer;
-	PositionClass* m_Position;
+	PositionClass* m_Position, *m_pos1, *m_pos2;
 	FpsClass* m_Fps;
 	CpuClass* m_Cpu;
 	FontShaderClass* m_FontShader;
 	TextClass* m_Text;
+
+	SkyDomeClass* m_SkyDome;
+	SkyDomeShaderClass* m_SkyDomeShader;
+
+	SkyPlaneClass *m_SkyPlane;
+	SkyPlaneShaderClass* m_SkyPlaneShader;
+
+	ModelClass *m_model, *m_model2;
+
+	bool boxcollisionX, boxcollisionZ;
+	bool xp, xn, zp, zn, xp2, xn2, zp2, zn2;
+	bool m_win;
+	float movement, movement2;
+	int m_width, m_height;
 };
 
 #endif

@@ -79,8 +79,10 @@ private:
 	ID3D11BlendState* m_alphaDisableBlendingState;
 
 	//New rasterizer state for turning off back face culling.
+ID3D11RasterizerState* m_rasterStateNoCulling;
 
-	ID3D11RasterizerState* m_rasterStateNoCulling;
+	//the new blend state pointer.
+ID3D11BlendState* m_alphaBlendState2;
 };
 
 #endif
