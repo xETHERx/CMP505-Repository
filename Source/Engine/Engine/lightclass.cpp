@@ -39,6 +39,11 @@ void LightClass::SetDirection(float x, float y, float z)
 	return;
 }
 
+void LightClass::SetPosition(float x, float y, float z)
+{
+	m_position = D3DXVECTOR3(x, y, z);
+	return;
+}
 
 D3DXVECTOR4 LightClass::GetAmbientColor()
 {
@@ -55,4 +60,55 @@ D3DXVECTOR4 LightClass::GetDiffuseColor()
 D3DXVECTOR3 LightClass::GetDirection()
 {
 	return m_direction;
+}
+
+D3DXVECTOR3 LightClass::GetPosition()
+{
+	return m_position;
+}
+
+
+void LightClass::GenerateViewMatrix()
+{
+	D3DXVECTOR3 up;
+
+
+	// Setup the vector that points upwards.
+	up.x = 0.0f;
+	up.y = 1.0f;
+	up.z = 0.0f;
+
+	// Create the view matrix from the three vectors.
+	D3DXMatrixLookAtLH(&m_viewMatrix, &m_position, &m_direction, &up);
+
+	return;
+}
+
+void LightClass::GenerateProjectionMatrix(float screenDepth, float screenNear)
+{
+	float fieldOfView, screenAspect;
+
+
+	// Setup field of view and screen aspect for a square light source.
+	fieldOfView = (float)D3DX_PI / 2.0f;
+	screenAspect = 1.0f;
+
+	// Create the projection matrix for the light.
+	D3DXMatrixPerspectiveFovLH(&m_projectionMatrix, fieldOfView, screenAspect, screenNear, screenDepth);
+
+	return;
+}
+
+
+void LightClass::GetViewMatrix(D3DXMATRIX& viewMatrix)
+{
+	viewMatrix = m_viewMatrix;
+	return;
+}
+
+
+void LightClass::GetProjectionMatrix(D3DXMATRIX& projectionMatrix)
+{
+	projectionMatrix = m_projectionMatrix;
+	return;
 }
