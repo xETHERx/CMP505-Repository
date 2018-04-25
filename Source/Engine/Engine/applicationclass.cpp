@@ -59,6 +59,9 @@ ApplicationClass::ApplicationClass()
 	m_win = false;
 	movement = 0;
 	movement2 = 0;
+
+	m_DepthShader = 0;
+	m_ShadowShader = 0;
 }
 
 
@@ -338,7 +341,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	}
 
 	// Initialize the bitmap object.
-	result = m_BitMap->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/youwin.dds", 256, 256);
+	result = m_BitMap->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/youwin.dds", 600, 600);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_BitMap object.", L"Error", MB_OK);
@@ -461,6 +464,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	{
 		return false;
 	}
+	//m_Light->GenerateProjectionMatrix(SCREEN_DEPTH, SCREEN_NEAR);
 
 	result = m_lightshader->Initialize(m_Direct3D->GetDevice(), hwnd);
 	if (!result)
@@ -786,23 +790,24 @@ bool ApplicationClass::HandleInput(float frameTime)
 	m_Position->GetPosition(camPos.x, camPos.y, camPos.z);
 	m_pos1->GetPosition(boxPos1.x, boxPos1.y, boxPos1.z);
 	m_pos2->GetPosition(boxPos2.x, boxPos2.y, boxPos2.z);
-
-	// Handle the input.
-	if (!(camPos.x - boxPos1.x <= 4 && camPos.x - boxPos1.x >= -4
-		&& camPos.z - boxPos1.z <= 4 && camPos.z - boxPos1.z >= -4)&&
-		!(camPos.x - boxPos2.x <= 4 && camPos.x - boxPos2.x >= -4
-			&& camPos.z - boxPos2.z <= 4 && camPos.z - boxPos2.z >= -4))
+	if (!m_win)
 	{
-		keyDown = m_Input->IsUpPressed();
-		m_Position->MoveForward(keyDown);
+		// Handle the input.
+		if (!(camPos.x - boxPos1.x <= 4 && camPos.x - boxPos1.x >= -4
+			&& camPos.z - boxPos1.z <= 4 && camPos.z - boxPos1.z >= -4) &&
+			!(camPos.x - boxPos2.x <= 4 && camPos.x - boxPos2.x >= -4
+				&& camPos.z - boxPos2.z <= 4 && camPos.z - boxPos2.z >= -4))
+		{
+			keyDown = m_Input->IsUpPressed();
+			m_Position->MoveForward(keyDown);
 
-		m_Input->GetMouseLocation(mousex, mousey);
-		m_Position->Rotate((float)mousex, (float)mousey);
+			m_Input->GetMouseLocation(mousex, mousey);
+			m_Position->Rotate((float)mousex, (float)mousey);
 
-	}
+		}
 		keyDown = m_Input->IsDownPressed();
 		m_Position->MoveBackward(keyDown);
-
+	}
 	// Get the view point position/rotation.
 	m_Position->GetPosition(posX, posY, posZ);
 	m_Position->GetRotation(rotX, rotY, rotZ);
@@ -1242,12 +1247,7 @@ void ApplicationClass::Collisiondetect()
 				zn = true;
 				//m_pos1->SetPosition(box1Pos.x, box1Pos.y, box1Pos.z - 10);
 			}
-			////betweenBox
-			//if (abs(box2Pos.z - box1Pos.z) <= 0)
-			//{
-			//	zp = false;
-			//	zn = false;
-			//}
+
 
 		}
 	}

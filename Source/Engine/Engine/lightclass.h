@@ -29,6 +29,12 @@ public:
 	D3DXVECTOR4 GetDiffuseColor();
 	D3DXVECTOR3 GetDirection();
 
+	/*void GenerateViewMatrix();
+	void GenerateProjectionMatrix(float, float);
+
+	void GetViewMatrix(D3DXMATRIX&);
+	void GetProjectionMatrix(D3DXMATRIX&);
+*/
 private:
 	D3DXVECTOR4 m_ambientColor;
 	D3DXVECTOR4 m_diffuseColor;

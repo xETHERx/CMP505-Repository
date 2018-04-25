@@ -55,10 +55,10 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): w
   c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(54094): note: 参见“D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS”的前一个定义
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: “D3D10_ERROR_FILE_NOT_FOUND”: 宏重定义
   c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(54103): note: 参见“D3D10_ERROR_FILE_NOT_FOUND”的前一个定义
-d:\github\cmp505_lililiu\source\engine\engine\applicationclass.cpp(852): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505_lililiu\source\engine\engine\applicationclass.cpp(910): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505_lililiu\source\engine\engine\applicationclass.cpp(945): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505_lililiu\source\engine\engine\applicationclass.cpp(1032): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505_lililiu\source\engine\engine\applicationclass.cpp(1048): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505_lililiu\source\engine\engine\applicationclass.cpp(1063): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-  Engine.vcxproj -> D:\GitHub\CMP505_lililiu\Source\Engine\Debug\Engine.exe
+d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(857): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(915): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(950): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(1037): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(1053): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(1068): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+  Engine.vcxproj -> D:\GitHub\CMP505-Repository\Source\Engine\Debug\Engine.exe

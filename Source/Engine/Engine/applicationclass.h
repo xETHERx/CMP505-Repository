@@ -39,6 +39,8 @@ const float SCREEN_NEAR = 0.1f;
 #include "textureshaderclass.h"
 #include "lightclass.h"
 #include "lightshaderclass.h"
+#include "depthshaderclass.h"
+#include "shadowshaderclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ApplicationClass
@@ -94,7 +96,11 @@ private:
 	bool m_win;
 	float movement, movement2;
 	int m_width, m_height;
+
 	D3DXMATRIX baseViewMatrix;
+	//shadow
+	DepthShaderClass* m_DepthShader;
+	ShadowShaderClass* m_ShadowShader;
 };
 
 #endif
