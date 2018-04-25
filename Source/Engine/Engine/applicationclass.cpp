@@ -39,8 +39,7 @@ ApplicationClass::ApplicationClass()
 
 	m_TextureShader = 0;//
 
-	m_Light = 0;//
-	m_lightshader = 0;//
+	
 
 	m_pos1 = 0;//
 	m_pos2 = 0;//
@@ -60,8 +59,11 @@ ApplicationClass::ApplicationClass()
 	movement = 0;
 	movement2 = 0;
 
+    m_Light = 0;//
+	m_lightshader = 0;//
 	m_DepthShader = 0;
 	m_ShadowShader = 0;
+	m_RenderTexture = 0;
 }
 
 
@@ -458,6 +460,8 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	m_Light->SetAmbientColor(0.3f, 0.3f, 0.3f, 1.0f);
 	m_Light->SetDiffuseColor(0.5f, 0.5f, 0.5f, 0.5f);
 	m_Light->SetDirection(0.0f, -1.0f, -1.0f);
+	m_Light->GenerateProjectionMatrix(SCREEN_DEPTH, SCREEN_NEAR);
+
 
 	m_lightshader = new LightShaderClass;
 	if (!m_lightshader)
@@ -472,6 +476,25 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
+	// Create the depth shader object.
+	m_DepthShader = new DepthShaderClass;
+	if (!m_DepthShader)
+	{
+		return false;
+	}
+
+	// Initialize the depth shader object.
+	result = m_DepthShader->Initialize(m_Direct3D->GetDevice(), hwnd);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the depth shader object.", L"Error", MB_OK);
+		return false;
+	}
+
+
+	///////////////
+	//Box Position
+	///////////////
 	m_pos1 = new PositionClass;
 	if (!m_pos1)
 	{
@@ -486,9 +509,9 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	}
 	m_pos2->SetPosition(65,0,57);
 
-	//////////////////////////
+	/////////////////////
 	//sound            //
-	///////////////////////////
+	/////////////////////
 
 	// Initialize the Direct3D object.
 
@@ -518,6 +541,20 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
+	// Create the render to texture object.
+	m_RenderTexture = new RenderTextureClass;
+	if (!m_RenderTexture)
+	{
+		return false;
+	}
+
+	// Initialize the render to texture object.
+	result = m_RenderTexture->Initialize(m_Direct3D->GetDevice(), SHADOWMAP_WIDTH, SHADOWMAP_HEIGHT, SCREEN_DEPTH, SCREEN_NEAR);
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the render to texture object.", L"Error", MB_OK);
+		return false;
+	}
 
 	return true;
 
@@ -528,6 +565,29 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 void ApplicationClass::Shutdown()
 {
+	// Release the render to texture object.
+	if (m_RenderTexture)
+	{
+		m_RenderTexture->Shutdown();
+		delete m_RenderTexture;
+		m_RenderTexture = 0;
+	}
+
+	if (m_ShadowShader)
+	{
+		m_ShadowShader->Shutdown();
+		delete m_ShadowShader;
+		m_ShadowShader = 0;
+	}
+
+
+	if (m_DepthShader)
+	{
+		m_DepthShader->Shutdown();
+		delete m_DepthShader;
+		m_DepthShader = 0;
+	}
+
 	if (m_sound)
 	{
 		m_sound->Shutdown();
@@ -719,7 +779,7 @@ void ApplicationClass::Shutdown()
 
 bool ApplicationClass::Frame()
 {
-	
+	static float lightPositionX = -5.0f;
 	bool result;
 
 	Collisiondetect();
@@ -769,6 +829,23 @@ bool ApplicationClass::Frame()
 	// Render the graphics.
 	result = RenderGraphics();
 	if(!result)
+	{
+		return false;
+	}
+
+	// Update the position of the light each frame.
+	lightPositionX += 0.05f;
+	if (lightPositionX > 5.0f)
+	{
+		lightPositionX = -5.0f;
+	}
+
+	// Update the position of the light.
+	m_Light->SetPosition(lightPositionX, 8.0f, -5.0f);
+
+	// Render the graphics scene.
+	result = RenderGraphics();
+	if (!result)
 	{
 		return false;
 	}
@@ -830,6 +907,7 @@ bool ApplicationClass::HandleInput(float frameTime)
 		return false;
 	}
 
+
 	return true;
 }
 
@@ -846,25 +924,17 @@ bool ApplicationClass::RenderGraphics()
 
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
+	
 
-	// Get the world, view, projection, and ortho matrices from the camera and Direct3D objects.
-	m_Direct3D->GetWorldMatrix(worldMatrix);
-	m_Camera->GetViewMatrix(viewMatrix);
-	m_Direct3D->GetProjectionMatrix(projectionMatrix);
-	m_Direct3D->GetOrthoMatrix(orthoMatrix);
+	///////////////
+	//shadow
+	///////////////
 
-	m_Position->GetPosition(cameraPosition.x, cameraPosition.y, cameraPosition.z);
-	foundHeight = m_Terrain->GetHeightAtPosition(cameraPosition.x, cameraPosition.z, height);
 
-	if (foundHeight)
-	{
-		m_Position->SetPosition(cameraPosition.x, height + 2, cameraPosition.z);
 
-	}
-
-	//////////
-	//skybox//
-	//////////
+	/////////////////
+	//Render skybox//
+	/////////////////
 
 	// Get the position of the camera.
 	cameraPosition = m_Camera->GetPosition();
@@ -1318,3 +1388,79 @@ void ApplicationClass::Collisiondetect()
 	return;
 }
 
+bool ApplicationClass::RenderSceneToTexture()
+{
+	D3DXMATRIX worldMatrix, lightViewMatrix, lightProjectionMatrix, translateMatrix;
+	float posX, posY, posZ;
+	bool result;
+	//Set the render to texture to be the rendering target.
+
+		// Set the render target to be the render to texture.
+   m_RenderTexture->SetRenderTarget(m_Direct3D->GetDeviceContext());
+
+	// Clear the render to texture.
+   m_RenderTexture->ClearRenderTarget(m_Direct3D->GetDeviceContext(), 0.0f, 0.0f, 0.0f, 1.0f);
+
+
+		// Generate the light view matrix based on the light's position.
+		m_Light->GenerateViewMatrix();
+
+	// Get the world matrix from the d3d object.
+		m_Direct3D->GetWorldMatrix(worldMatrix);
+
+	// Get the view and orthographic matrices from the light object.
+	m_Light->GetViewMatrix(lightViewMatrix);
+	m_Light->GetProjectionMatrix(lightProjectionMatrix);
+	
+		// Setup the translation matrix for the cube model.
+		m_pos1->GetPosition(posX, posY, posZ);
+	D3DXMatrixTranslation(&worldMatrix, posX, posY, posZ);
+
+	// Render the cube model with the depth shader.
+	m_model->Render(m_Direct3D->GetDeviceContext());
+	result = m_DepthShader->Render(m_Direct3D->GetDeviceContext(), m_model->GetIndexCount(), worldMatrix, lightViewMatrix, lightProjectionMatrix);
+	if (!result)
+	{
+		return false;
+	}
+
+	// Reset the world matrix.
+	m_Direct3D->GetWorldMatrix(worldMatrix);
+
+	// Setup the translation matrix for the sphere model.
+	m_pos2->GetPosition(posX, posY, posZ);
+	D3DXMatrixTranslation(&worldMatrix, posX, posY, posZ);
+
+	// Render the sphere model with the depth shader.
+	m_model2->Render(m_Direct3D->GetDeviceContext());
+	result = m_DepthShader->Render(m_Direct3D->GetDeviceContext(), m_model2->GetIndexCount(), worldMatrix, lightViewMatrix, lightProjectionMatrix);
+	if (!result)
+	{
+		return false;
+	}
+
+	// Reset the world matrix.
+	m_Direct3D->GetWorldMatrix(worldMatrix);
+
+	// Setup the translation matrix for the ground model.
+	m_Position->GetPosition(posX, posY, posZ);
+	D3DXMatrixTranslation(&worldMatrix, posX, posY, posZ);
+
+	// Render the ground model with the depth shader.
+	m_Terrain->Render(m_Direct3D->GetDeviceContext());
+	result = m_DepthShader->Render(m_Direct3D->GetDeviceContext(), m_Terrain->GetIndexCount(), worldMatrix, lightViewMatrix, lightProjectionMatrix);
+	if (!result)
+	{
+		return false;
+	}
+
+\
+
+	// Reset the render target back to the original back buffer and not the render to texture anymore.
+	m_Direct3D->SetBackBufferRenderTarget();
+
+	// Reset the viewport back to the original.
+    m_Direct3D->ResetViewport();
+
+	return true;
+}

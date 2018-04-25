@@ -12,7 +12,9 @@ const bool FULL_SCREEN = true;
 const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
-
+// new define for the shadow map size
+const float SHADOWMAP_WIDTH = 256.0;
+const float SHADOWMAP_HEIGHT = 256.0;
 
 ///////////////////////
 // MY CLASS INCLUDES //
@@ -41,6 +43,7 @@ const float SCREEN_NEAR = 0.1f;
 #include "lightshaderclass.h"
 #include "depthshaderclass.h"
 #include "shadowshaderclass.h"
+#include "rendertextureclass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: ApplicationClass
@@ -55,6 +58,7 @@ public:
 	bool Initialize(HINSTANCE, HWND, int, int);
 	void Shutdown();
 	bool Frame();
+	
 
 private:
 	bool HandleInput(float);
@@ -91,6 +95,8 @@ private:
 	LightClass* m_Light;
 	LightShaderClass*m_lightshader;
 
+	bool RenderSceneToTexture();
+
 	bool boxcollisionX, boxcollisionZ;
 	bool xp, xn, zp, zn, xp2, xn2, zp2, zn2;
 	bool m_win;
@@ -99,6 +105,7 @@ private:
 
 	D3DXMATRIX baseViewMatrix;
 	//shadow
+	RenderTextureClass* m_RenderTexture;
 	DepthShaderClass* m_DepthShader;
 	ShadowShaderClass* m_ShadowShader;
 };
