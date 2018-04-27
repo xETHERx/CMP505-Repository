@@ -1162,9 +1162,6 @@ bool ApplicationClass::RenderGraphics()
 	{
 		return false;
 	}
-	/////////////////////////////
-	//minimap_boxobj           //
-	/////////////////////////////
 
 	////////////////////
 	//Minimap_boxes //
