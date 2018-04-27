@@ -59,6 +59,9 @@ public:
 	//Cloud
 	void EnableSecondBlendState();
 
+	void SetBackBufferRenderTarget();
+	void ResetViewport();
+
 private:
 	bool m_vsync_enabled;
 	int m_videoCardMemory;
@@ -83,6 +86,8 @@ ID3D11RasterizerState* m_rasterStateNoCulling;
 
 	//the new blend state pointer.
 ID3D11BlendState* m_alphaBlendState2;
+
+D3D11_VIEWPORT m_viewport;
 
 //render 2d imange_ new depth stencil state for 2D drawing.
 //D3D11DepthStencilState* m_depthDisabledStencilState;

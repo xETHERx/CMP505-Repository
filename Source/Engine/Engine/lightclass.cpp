@@ -79,7 +79,7 @@ void LightClass::GenerateViewMatrix()
 	up.z = 0.0f;
 
 	// Create the view matrix from the three vectors.
-	D3DXMatrixLookAtLH(&m_viewMatrix, &m_position, &m_direction, &up);
+	D3DXMatrixLookAtLH(&m_viewMatrix, &m_position, &m_lookAt, &up);
 
 	return;
 }
@@ -110,5 +110,11 @@ void LightClass::GetViewMatrix(D3DXMATRIX& viewMatrix)
 void LightClass::GetProjectionMatrix(D3DXMATRIX& projectionMatrix)
 {
 	projectionMatrix = m_projectionMatrix;
+	return;
+}
+
+void LightClass::SetLookAt(float x, float y, float z)
+{
+	m_lookAt = D3DXVECTOR3(x, y, z);
 	return;
 }

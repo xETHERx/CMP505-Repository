@@ -25,6 +25,7 @@ public:
 	void SetDiffuseColor(float, float, float, float);
 	void SetDirection(float, float, float);
 	void SetPosition(float, float, float);
+	void SetLookAt(float, float, float);
 
 	D3DXVECTOR4 GetAmbientColor();
 	D3DXVECTOR4 GetDiffuseColor();
@@ -41,6 +42,7 @@ private:
 	D3DXVECTOR4 m_ambientColor;
 	D3DXVECTOR4 m_diffuseColor;
 	D3DXVECTOR3 m_direction;
+	D3DXVECTOR3 m_lookAt;
 	D3DXVECTOR3 m_position;
 	D3DXMATRIX m_viewMatrix;
 	D3DXMATRIX m_projectionMatrix;

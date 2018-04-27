@@ -18,7 +18,7 @@ ApplicationClass::ApplicationClass()
 	m_Cpu = 0;//
 	m_FontShader = 0;//
 	m_Text = 0;//
-	
+
 	m_SkyDome = 0;//
 	m_SkyDomeShader = 0;//
 
@@ -39,7 +39,7 @@ ApplicationClass::ApplicationClass()
 
 	m_TextureShader = 0;//
 
-	
+
 
 	m_pos1 = 0;//
 	m_pos2 = 0;//
@@ -50,16 +50,16 @@ ApplicationClass::ApplicationClass()
 	xp = false;
 	xn = false;
 	zp = false;
-	zn = false; 
-	xp2 = false; 
-	xn2 = false; 
-	zp2 = false; 
+	zn = false;
+	xp2 = false;
+	xn2 = false;
+	zp2 = false;
 	zn2 = false;
 	m_win = false;
 	movement = 0;
 	movement2 = 0;
 
-    m_Light = 0;//
+	m_Light = 0;//
 	m_lightshader = 0;//
 	m_DepthShader = 0;
 	m_ShadowShader = 0;
@@ -87,17 +87,17 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	m_width = screenWidth;
 	m_height = screenHeight;
-	
+
 	// Create the input object.  The input object will be used to handle reading the keyboard and mouse input from the user.
 	m_Input = new InputClass;
-	if(!m_Input)
+	if (!m_Input)
 	{
 		return false;
 	}
 
 	// Initialize the input object.
 	result = m_Input->Initialize(hinstance, hwnd, screenWidth, screenHeight);
-	if(!result)
+	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the input object.", L"Error", MB_OK);
 		return false;
@@ -105,14 +105,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the Direct3D object.
 	m_Direct3D = new D3DClass;
-	if(!m_Direct3D)
+	if (!m_Direct3D)
 	{
 		return false;
 	}
 
 	// Initialize the Direct3D object.
 	result = m_Direct3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_DEPTH, SCREEN_NEAR);
-	if(!result)
+	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize DirectX 11.", L"Error", MB_OK);
 		return false;
@@ -120,7 +120,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the camera object.
 	m_Camera = new CameraClass;
-	if(!m_Camera)
+	if (!m_Camera)
 	{
 		return false;
 	}
@@ -139,14 +139,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the terrain object.
 	m_Terrain = new TerrainClass;
-	if(!m_Terrain)
+	if (!m_Terrain)
 	{
 		return false;
 	}
 
 	// Initialize the terrain object.
-	result = m_Terrain->InitializeTerrain(m_Direct3D->GetDevice(), 129, 129);
-	if(!result)
+	result = m_Terrain->InitializeTerrain(m_Direct3D->GetDevice(), 129, 129, L"../Engine/data/colorm01.bmp");
+	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the terrain object.", L"Error", MB_OK);
 		return false;
@@ -166,14 +166,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the color shader object.
 	m_ColorShader = new ColorShaderClass;
-	if(!m_ColorShader)
+	if (!m_ColorShader)
 	{
 		return false;
 	}
 
 	// Initialize the color shader object.
 	result = m_ColorShader->Initialize(m_Direct3D->GetDevice(), hwnd);
-	if(!result)
+	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the color shader object.", L"Error", MB_OK);
 		return false;
@@ -181,14 +181,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the timer object.
 	m_Timer = new TimerClass;
-	if(!m_Timer)
+	if (!m_Timer)
 	{
 		return false;
 	}
 
 	// Initialize the timer object.
 	result = m_Timer->Initialize();
-	if(!result)
+	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the timer object.", L"Error", MB_OK);
 		return false;
@@ -196,7 +196,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the position object.
 	m_Position = new PositionClass;
-	if(!m_Position)
+	if (!m_Position)
 	{
 		return false;
 	}
@@ -206,7 +206,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the fps object.
 	m_Fps = new FpsClass;
-	if(!m_Fps)
+	if (!m_Fps)
 	{
 		return false;
 	}
@@ -216,7 +216,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the cpu object.
 	m_Cpu = new CpuClass;
-	if(!m_Cpu)
+	if (!m_Cpu)
 	{
 		return false;
 	}
@@ -226,14 +226,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the font shader object.
 	m_FontShader = new FontShaderClass;
-	if(!m_FontShader)
+	if (!m_FontShader)
 	{
 		return false;
 	}
 
 	// Initialize the font shader object.
 	result = m_FontShader->Initialize(m_Direct3D->GetDevice(), hwnd);
-	if(!result)
+	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the font shader object.", L"Error", MB_OK);
 		return false;
@@ -241,14 +241,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Create the text object.
 	m_Text = new TextClass;
-	if(!m_Text)
+	if (!m_Text)
 	{
 		return false;
 	}
 
 	// Initialize the text object.
 	result = m_Text->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), hwnd, screenWidth, screenHeight, baseViewMatrix);
-	if(!result)
+	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the text object.", L"Error", MB_OK);
 		return false;
@@ -259,7 +259,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 
 	// Set the video card information in the text object.
 	result = m_Text->SetVideoCardInfo(videoCard, videoMemory, m_Direct3D->GetDeviceContext());
-	if(!result)
+	if (!result)
 	{
 		MessageBox(hwnd, L"Could not set video card info in the text object.", L"Error", MB_OK);
 		return false;
@@ -363,7 +363,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		MessageBox(hwnd, L"Could not initialize the Minimap object.", L"Error", MB_OK);
 		return false;
 	}
-	 //minimap_box01
+	//minimap_box01
 	m_Minibox01 = new BitmapClass;
 	if (!m_Minibox01)
 	{
@@ -447,7 +447,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	
+
 	// Initialize the light object.
 	// Create the light object.
 	m_Light = new LightClass;
@@ -460,6 +460,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	m_Light->SetAmbientColor(0.3f, 0.3f, 0.3f, 1.0f);
 	m_Light->SetDiffuseColor(0.5f, 0.5f, 0.5f, 0.5f);
 	m_Light->SetDirection(0.0f, -1.0f, -1.0f);
+	m_Light->SetLookAt(0, -1, -1);
 	m_Light->GenerateProjectionMatrix(SCREEN_DEPTH, SCREEN_NEAR);
 
 
@@ -500,14 +501,14 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	{
 		return false;
 	}
-	m_pos1->SetPosition(65,0,65);
+	m_pos1->SetPosition(65, 0, 65);
 
 	m_pos2 = new PositionClass;
 	if (!m_pos2)
 	{
 		return false;
 	}
-	m_pos2->SetPosition(65,0,57);
+	m_pos2->SetPosition(65, 0, 57);
 
 	/////////////////////
 	//sound            //
@@ -556,6 +557,17 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
+	m_ShadowShader = new ShadowShaderClass;
+	if (!m_ShadowShader)
+	{
+		return false;
+	}
+
+	result = m_ShadowShader->Initialize(m_Direct3D->GetDevice(), hwnd);
+	if (!result)
+	{
+		return false;
+	}
 	return true;
 
 
@@ -602,7 +614,7 @@ void ApplicationClass::Shutdown()
 		m_sound2 = 0;
 	}
 
-	if(m_pos1)
+	if (m_pos1)
 	{
 		delete m_pos1;
 		m_pos1 = 0;
@@ -683,7 +695,7 @@ void ApplicationClass::Shutdown()
 	}
 
 	// Release the text object.
-	if(m_Text)
+	if (m_Text)
 	{
 		m_Text->Shutdown();
 		delete m_Text;
@@ -691,7 +703,7 @@ void ApplicationClass::Shutdown()
 	}
 
 	// Release the font shader object.
-	if(m_FontShader)
+	if (m_FontShader)
 	{
 		m_FontShader->Shutdown();
 		delete m_FontShader;
@@ -699,7 +711,7 @@ void ApplicationClass::Shutdown()
 	}
 
 	// Release the cpu object.
-	if(m_Cpu)
+	if (m_Cpu)
 	{
 		m_Cpu->Shutdown();
 		delete m_Cpu;
@@ -707,28 +719,28 @@ void ApplicationClass::Shutdown()
 	}
 
 	// Release the fps object.
-	if(m_Fps)
+	if (m_Fps)
 	{
 		delete m_Fps;
 		m_Fps = 0;
 	}
 
 	// Release the position object.
-	if(m_Position)
+	if (m_Position)
 	{
 		delete m_Position;
 		m_Position = 0;
 	}
 
 	// Release the timer object.
-	if(m_Timer)
+	if (m_Timer)
 	{
 		delete m_Timer;
 		m_Timer = 0;
 	}
 
 	// Release the color shader object.
-	if(m_ColorShader)
+	if (m_ColorShader)
 	{
 		m_ColorShader->Shutdown();
 		delete m_ColorShader;
@@ -736,7 +748,7 @@ void ApplicationClass::Shutdown()
 	}
 
 	// Release the terrain object.
-	if(m_Terrain)
+	if (m_Terrain)
 	{
 		m_Terrain->Shutdown();
 		delete m_Terrain;
@@ -751,14 +763,14 @@ void ApplicationClass::Shutdown()
 	}
 
 	// Release the camera object.
-	if(m_Camera)
+	if (m_Camera)
 	{
 		delete m_Camera;
 		m_Camera = 0;
 	}
 
 	// Release the Direct3D object.
-	if(m_Direct3D)
+	if (m_Direct3D)
 	{
 		m_Direct3D->Shutdown();
 		delete m_Direct3D;
@@ -766,7 +778,7 @@ void ApplicationClass::Shutdown()
 	}
 
 	// Release the input object.
-	if(m_Input)
+	if (m_Input)
 	{
 		m_Input->Shutdown();
 		delete m_Input;
@@ -786,13 +798,13 @@ bool ApplicationClass::Frame()
 
 	// Read the user input.
 	result = m_Input->Frame();
-	if(!result)
+	if (!result)
 	{
 		return false;
 	}
-	
+
 	// Check if the user pressed escape and wants to exit the application.
-	if(m_Input->IsEscapePressed() == true)
+	if (m_Input->IsEscapePressed() == true)
 	{
 		return false;
 	}
@@ -804,21 +816,21 @@ bool ApplicationClass::Frame()
 
 	// Update the FPS value in the text object.
 	result = m_Text->SetFps(m_Fps->GetFps(), m_Direct3D->GetDeviceContext());
-	if(!result)
+	if (!result)
 	{
 		return false;
 	}
-	
+
 	// Update the CPU usage value in the text object.
 	result = m_Text->SetCpu(m_Cpu->GetCpuPercentage(), m_Direct3D->GetDeviceContext());
-	if(!result)
+	if (!result)
 	{
 		return false;
 	}
 
 	// Do the frame input processing.
 	result = HandleInput(m_Timer->GetTime());
-	if(!result)
+	if (!result)
 	{
 		return false;
 	}
@@ -828,20 +840,20 @@ bool ApplicationClass::Frame()
 
 	// Render the graphics.
 	result = RenderGraphics();
-	if(!result)
+	if (!result)
 	{
 		return false;
 	}
 
 	// Update the position of the light each frame.
-	lightPositionX += 0.05f;
-	if (lightPositionX > 5.0f)
-	{
-		lightPositionX = -5.0f;
-	}
+	//lightPositionX += 0.05f;
+	//if (lightPositionX > 5.0f)
+	//{
+	//	lightPositionX = -5.0f;
+	//}
 
 	// Update the position of the light.
-	m_Light->SetPosition(lightPositionX, 8.0f, -5.0f);
+	m_Light->SetPosition(0, 200.0f, -5.0f);
 
 	// Render the graphics scene.
 	result = RenderGraphics();
@@ -895,14 +907,14 @@ bool ApplicationClass::HandleInput(float frameTime)
 
 	// Update the position values in the text object.
 	result = m_Text->SetCameraPosition(posX, posY, posZ, m_Direct3D->GetDeviceContext());
-	if(!result)
+	if (!result)
 	{
 		return false;
 	}
 
 	// Update the rotation values in the text object.
 	result = m_Text->SetCameraRotation(rotX, rotY, rotZ, m_Direct3D->GetDeviceContext());
-	if(!result)
+	if (!result)
 	{
 		return false;
 	}
@@ -914,23 +926,40 @@ bool ApplicationClass::HandleInput(float frameTime)
 
 bool ApplicationClass::RenderGraphics()
 {
-	D3DXMATRIX worldMatrix, viewMatrix, projectionMatrix, orthoMatrix;
+	D3DXMATRIX worldMatrix, viewMatrix, projectionMatrix, orthoMatrix, lightViewMatrix, lightProjectionMatrix;
 	D3DXVECTOR3 cameraPosition, boxpos1;
 	bool result, foundHeight;
-	float height;
+	float height, posX, posY, posZ;
 
+	result = RenderSceneToTexture();
+	if (!result)
+	{
+		return false;
+	}
 	// Clear the scene.
 	m_Direct3D->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Generate the view matrix based on the camera's position.
 	m_Camera->Render();
+
+	// Get the world, view, projection, and ortho matrices from the camera and Direct3D objects.
+	m_Direct3D->GetWorldMatrix(worldMatrix);
+	m_Camera->GetViewMatrix(viewMatrix);
+	m_Direct3D->GetProjectionMatrix(projectionMatrix);
+	m_Direct3D->GetOrthoMatrix(orthoMatrix);
+	m_Light->GetViewMatrix(lightViewMatrix);
+	m_Light->GetProjectionMatrix(lightProjectionMatrix);
+
+	m_Position->GetPosition(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+	foundHeight = m_Terrain->GetHeightAtPosition(cameraPosition.x, cameraPosition.z, height);
+
+	if (foundHeight)
+	{
+		m_Position->SetPosition(cameraPosition.x, height + 2, cameraPosition.z);
+
+	}
+
 	
-
-	///////////////
-	//shadow
-	///////////////
-
-
 
 	/////////////////
 	//Render skybox//
@@ -969,12 +998,46 @@ bool ApplicationClass::RenderGraphics()
 	m_Terrain->Render(m_Direct3D->GetDeviceContext());
 
 	// Render the terrain using the terrain shader.
-	result = m_TerrainShader->Render(m_Direct3D->GetDeviceContext(), m_Terrain->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_Light->GetAmbientColor(), m_Light->GetDiffuseColor(), m_Light->GetDirection());
+	result = m_ShadowShader->Render(m_Direct3D->GetDeviceContext(), m_Terrain->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, lightViewMatrix,
+		lightProjectionMatrix, m_Terrain->GetTexture(), m_RenderTexture->GetShaderResourceView(), m_Light->GetPosition(),
+		m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
 	if (!result)
 	{
 		return false;
 	}
+
+
+	//////////
+	//shadow//
+	//////////
+
+
+	//// Setup the translation matrix for the cube model.
+	//m_pos1->GetPosition(posX, posY, posZ);
+	//D3DXMatrixTranslation(&worldMatrix, posX, posY, posZ);
+
+	//// Put the cube model vertex and index buffers on the graphics pipeline to prepare them for drawing.
+	//m_model->Render(m_Direct3D->GetDeviceContext());
+
+	//// Render the model using the shadow shader.
+	//
+	////box2
+
+	//// Reset the world matrix.
+	//m_Direct3D->GetWorldMatrix(worldMatrix);
+
+	//// Setup the translation matrix for the sphere model.
+	//m_pos2->GetPosition(posX, posY, posZ);
+	//D3DXMatrixTranslation(&worldMatrix, posX, posY, posZ);
+
+	//// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
+	//m_model2->Render(m_Direct3D->GetDeviceContext());
+
+	//if (!result)
+	//{
+	//	return false;
+	//}
+
 
 	D3DXMATRIX rotationMatrix, translationMatrix, scaleMatrix;
 	D3DXVECTOR3 boxPos1, boxPos2, cameraPos;
@@ -1005,8 +1068,10 @@ bool ApplicationClass::RenderGraphics()
 	m_model->Render(m_Direct3D->GetDeviceContext());
 
 	// Render the model using the light shader.
-	result = m_lightshader->Render(m_Direct3D->GetDeviceContext(), m_model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_model->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
+	result = m_ShadowShader->Render(m_Direct3D->GetDeviceContext(), m_model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, lightViewMatrix,
+		lightProjectionMatrix, m_model->GetTexture(), m_RenderTexture->GetShaderResourceView(), m_Light->GetPosition(),
+		m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
+
 	if (!result)
 	{
 		return false;
@@ -1030,8 +1095,9 @@ bool ApplicationClass::RenderGraphics()
 	worldMatrix = translationMatrix;
 	m_model2->Render(m_Direct3D->GetDeviceContext());
 
-	result = m_lightshader->Render(m_Direct3D->GetDeviceContext(), m_model2->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix,
-		m_model2->GetTexture(), m_Light->GetDirection(), m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
+	result = m_ShadowShader->Render(m_Direct3D->GetDeviceContext(), m_model2->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, lightViewMatrix,
+		lightProjectionMatrix, m_model2->GetTexture(), m_RenderTexture->GetShaderResourceView(), m_Light->GetPosition(),
+		m_Light->GetAmbientColor(), m_Light->GetDiffuseColor());
 	if (!result)
 	{
 		return false;
@@ -1396,24 +1462,24 @@ bool ApplicationClass::RenderSceneToTexture()
 	//Set the render to texture to be the rendering target.
 
 		// Set the render target to be the render to texture.
-   m_RenderTexture->SetRenderTarget(m_Direct3D->GetDeviceContext());
+	m_RenderTexture->SetRenderTarget(m_Direct3D->GetDeviceContext());
 
 	// Clear the render to texture.
-   m_RenderTexture->ClearRenderTarget(m_Direct3D->GetDeviceContext(), 0.0f, 0.0f, 0.0f, 1.0f);
+	m_RenderTexture->ClearRenderTarget(m_Direct3D->GetDeviceContext(), 0.0f, 0.0f, 0.0f, 1.0f);
 
 
-		// Generate the light view matrix based on the light's position.
-		m_Light->GenerateViewMatrix();
+	// Generate the light view matrix based on the light's position.
+	m_Light->GenerateViewMatrix();
 
 	// Get the world matrix from the d3d object.
-		m_Direct3D->GetWorldMatrix(worldMatrix);
+	m_Direct3D->GetWorldMatrix(worldMatrix);
 
 	// Get the view and orthographic matrices from the light object.
 	m_Light->GetViewMatrix(lightViewMatrix);
 	m_Light->GetProjectionMatrix(lightProjectionMatrix);
-	
-		// Setup the translation matrix for the cube model.
-		m_pos1->GetPosition(posX, posY, posZ);
+
+	// Setup the translation matrix for the cube model.
+	m_pos1->GetPosition(posX, posY, posZ);
 	D3DXMatrixTranslation(&worldMatrix, posX, posY, posZ);
 
 	// Render the cube model with the depth shader.
@@ -1443,7 +1509,10 @@ bool ApplicationClass::RenderSceneToTexture()
 	m_Direct3D->GetWorldMatrix(worldMatrix);
 
 	// Setup the translation matrix for the ground model.
-	m_Position->GetPosition(posX, posY, posZ);
+	//m_Position->GetPosition(posX, posY, posZ);
+	posX = 0;
+	posY = 0;
+	posZ = 0;
 	D3DXMatrixTranslation(&worldMatrix, posX, posY, posZ);
 
 	// Render the ground model with the depth shader.
@@ -1454,13 +1523,11 @@ bool ApplicationClass::RenderSceneToTexture()
 		return false;
 	}
 
-\
-
 	// Reset the render target back to the original back buffer and not the render to texture anymore.
 	m_Direct3D->SetBackBufferRenderTarget();
 
 	// Reset the viewport back to the original.
-    m_Direct3D->ResetViewport();
+	m_Direct3D->ResetViewport();
 
 	return true;
 }

@@ -13,8 +13,8 @@ const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
 // new define for the shadow map size
-const float SHADOWMAP_WIDTH = 256.0;
-const float SHADOWMAP_HEIGHT = 256.0;
+const float SHADOWMAP_WIDTH = 2048;
+const float SHADOWMAP_HEIGHT = 2048;
 
 ///////////////////////
 // MY CLASS INCLUDES //
