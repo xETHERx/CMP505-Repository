@@ -91,6 +91,7 @@ private:
 	BitmapClass* m_Minimap, *m_Minibox01, *m_Minibox02,*m_Player, *m_BitMap;
 
 	SoundClass* m_sound, *m_sound2;
+
 	TextureShaderClass* m_TextureShader;
 	LightClass* m_Light;
 	LightShaderClass*m_lightshader;

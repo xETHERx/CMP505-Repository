@@ -343,7 +343,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 	}
 
 	// Initialize the bitmap object.
-	result = m_BitMap->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/youwin.dds", 600, 600);
+	result = m_BitMap->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/youwin.dds", 700, 700);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_BitMap object.", L"Error", MB_OK);
@@ -384,7 +384,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	result = m_Minibox02->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Box.dds", 8, 8);
+	result = m_Minibox02->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Box02.dds", 8, 8);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_Minibox02 object.", L"Error", MB_OK);
@@ -399,7 +399,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	result = m_Player->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Playericon.dds", 10, 10);
+	result = m_Player->Initialize(m_Direct3D->GetDevice(), screenWidth, screenHeight, L"../Engine/data/Playericon.dds", 12, 12);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the m_Player object.", L"Error", MB_OK);
@@ -440,7 +440,7 @@ bool ApplicationClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidt
 		return false;
 	}
 
-	result = m_model2->Initialize(m_Direct3D->GetDevice(), "../Engine/data/cube.txt", L"../Engine/data/Box.dds");
+	result = m_model2->Initialize(m_Direct3D->GetDevice(), "../Engine/data/cube.txt", L"../Engine/data/Box02.dds");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model2 object.", L"Error", MB_OK);
@@ -897,6 +897,15 @@ bool ApplicationClass::HandleInput(float frameTime)
 		keyDown = m_Input->IsDownPressed();
 		m_Position->MoveBackward(keyDown);
 	}
+
+	if (keyDown = m_Input->IsRPressed())
+	{
+		m_win = false;
+		m_pos1->SetPosition(65, 0, 65);
+		m_pos2->SetPosition(65, 0, 57);
+	}
+	
+
 	// Get the view point position/rotation.
 	m_Position->GetPosition(posX, posY, posZ);
 	m_Position->GetRotation(rotX, rotY, rotZ);
@@ -1440,10 +1449,11 @@ void ApplicationClass::Collisiondetect()
 		}
 	}
 
-	if (box1Pos.x == 40, box1Pos.z == 40)
+	if (box1Pos.x >=14&&box1Pos.x<=28 && box1Pos.z >=100 && box1Pos.z<=114 && box2Pos.z >= 14 && box2Pos.z <= 28 && box2Pos.x >= 100 && box2Pos.x <= 114)
 	{
+		if(!m_win)
+			m_sound2->PlayWaveFile();
 		m_win = true;
-		m_sound2->PlayWaveFile();
 
 	}
 

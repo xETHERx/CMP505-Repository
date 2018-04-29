@@ -1,68 +1,73 @@
 ﻿  applicationclass.cpp
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: “DXGI_STATUS_OCCLUDED”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53655): note: 参见“DXGI_STATUS_OCCLUDED”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: “DXGI_STATUS_CLIPPED”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53664): note: 参见“DXGI_STATUS_CLIPPED”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: “DXGI_STATUS_NO_REDIRECTION”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53673): note: 参见“DXGI_STATUS_NO_REDIRECTION”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: “DXGI_STATUS_NO_DESKTOP_ACCESS”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53682): note: 参见“DXGI_STATUS_NO_DESKTOP_ACCESS”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: “DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53691): note: 参见“DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: “DXGI_STATUS_MODE_CHANGED”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53700): note: 参见“DXGI_STATUS_MODE_CHANGED”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: “DXGI_STATUS_MODE_CHANGE_IN_PROGRESS”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53709): note: 参见“DXGI_STATUS_MODE_CHANGE_IN_PROGRESS”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: “DXGI_ERROR_INVALID_CALL”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53724): note: 参见“DXGI_ERROR_INVALID_CALL”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: “DXGI_ERROR_NOT_FOUND”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53733): note: 参见“DXGI_ERROR_NOT_FOUND”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: “DXGI_ERROR_MORE_DATA”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53742): note: 参见“DXGI_ERROR_MORE_DATA”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: “DXGI_ERROR_UNSUPPORTED”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53751): note: 参见“DXGI_ERROR_UNSUPPORTED”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: “DXGI_ERROR_DEVICE_REMOVED”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53760): note: 参见“DXGI_ERROR_DEVICE_REMOVED”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: “DXGI_ERROR_DEVICE_HUNG”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53769): note: 参见“DXGI_ERROR_DEVICE_HUNG”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: “DXGI_ERROR_DEVICE_RESET”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53779): note: 参见“DXGI_ERROR_DEVICE_RESET”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: “DXGI_ERROR_WAS_STILL_DRAWING”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53788): note: 参见“DXGI_ERROR_WAS_STILL_DRAWING”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: “DXGI_ERROR_FRAME_STATISTICS_DISJOINT”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53798): note: 参见“DXGI_ERROR_FRAME_STATISTICS_DISJOINT”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: “DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53807): note: 参见“DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: “DXGI_ERROR_DRIVER_INTERNAL_ERROR”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53817): note: 参见“DXGI_ERROR_DRIVER_INTERNAL_ERROR”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: “DXGI_ERROR_NONEXCLUSIVE”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53826): note: 参见“DXGI_ERROR_NONEXCLUSIVE”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: “DXGI_ERROR_NOT_CURRENTLY_AVAILABLE”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53835): note: 参见“DXGI_ERROR_NOT_CURRENTLY_AVAILABLE”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: “DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53845): note: 参见“DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: “DXGI_ERROR_REMOTE_OUTOFMEMORY”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(53854): note: 参见“DXGI_ERROR_REMOTE_OUTOFMEMORY”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: “D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(54118): note: 参见“D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: “D3D11_ERROR_FILE_NOT_FOUND”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(54127): note: 参见“D3D11_ERROR_FILE_NOT_FOUND”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: “D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(54137): note: 参见“D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: “D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(54146): note: 参见“D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: “D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(54094): note: 参见“D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS”的前一个定义
-c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: “D3D10_ERROR_FILE_NOT_FOUND”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\winerror.h(54103): note: 参见“D3D10_ERROR_FILE_NOT_FOUND”的前一个定义
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(553): warning C4244: “参数”: 从“const float”转换到“int”，可能丢失数据
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(954): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(1048): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(1085): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(1170): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(1186): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(1201): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(932): warning C4101: “posZ”: 未引用的局部变量
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(932): warning C4101: “posY”: 未引用的局部变量
-d:\github\cmp505-repository\source\engine\engine\applicationclass.cpp(932): warning C4101: “posX”: 未引用的局部变量
-  Engine.vcxproj -> D:\GitHub\CMP505-Repository\Source\Engine\Debug\Engine.exe
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(12): warning C4005: 'DXGI_STATUS_OCCLUDED': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50092): note: see previous definition of 'DXGI_STATUS_OCCLUDED'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(13): warning C4005: 'DXGI_STATUS_CLIPPED': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50101): note: see previous definition of 'DXGI_STATUS_CLIPPED'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(14): warning C4005: 'DXGI_STATUS_NO_REDIRECTION': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50110): note: see previous definition of 'DXGI_STATUS_NO_REDIRECTION'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(15): warning C4005: 'DXGI_STATUS_NO_DESKTOP_ACCESS': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50119): note: see previous definition of 'DXGI_STATUS_NO_DESKTOP_ACCESS'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(16): warning C4005: 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50128): note: see previous definition of 'DXGI_STATUS_GRAPHICS_VIDPN_SOURCE_IN_USE'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(17): warning C4005: 'DXGI_STATUS_MODE_CHANGED': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50137): note: see previous definition of 'DXGI_STATUS_MODE_CHANGED'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(18): warning C4005: 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50146): note: see previous definition of 'DXGI_STATUS_MODE_CHANGE_IN_PROGRESS'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(21): warning C4005: 'DXGI_ERROR_INVALID_CALL': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50161): note: see previous definition of 'DXGI_ERROR_INVALID_CALL'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(22): warning C4005: 'DXGI_ERROR_NOT_FOUND': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50170): note: see previous definition of 'DXGI_ERROR_NOT_FOUND'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(23): warning C4005: 'DXGI_ERROR_MORE_DATA': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50179): note: see previous definition of 'DXGI_ERROR_MORE_DATA'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(24): warning C4005: 'DXGI_ERROR_UNSUPPORTED': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50188): note: see previous definition of 'DXGI_ERROR_UNSUPPORTED'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(25): warning C4005: 'DXGI_ERROR_DEVICE_REMOVED': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50197): note: see previous definition of 'DXGI_ERROR_DEVICE_REMOVED'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(26): warning C4005: 'DXGI_ERROR_DEVICE_HUNG': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50206): note: see previous definition of 'DXGI_ERROR_DEVICE_HUNG'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(27): warning C4005: 'DXGI_ERROR_DEVICE_RESET': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50216): note: see previous definition of 'DXGI_ERROR_DEVICE_RESET'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(28): warning C4005: 'DXGI_ERROR_WAS_STILL_DRAWING': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50225): note: see previous definition of 'DXGI_ERROR_WAS_STILL_DRAWING'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(29): warning C4005: 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50235): note: see previous definition of 'DXGI_ERROR_FRAME_STATISTICS_DISJOINT'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(30): warning C4005: 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50244): note: see previous definition of 'DXGI_ERROR_GRAPHICS_VIDPN_SOURCE_IN_USE'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(31): warning C4005: 'DXGI_ERROR_DRIVER_INTERNAL_ERROR': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50254): note: see previous definition of 'DXGI_ERROR_DRIVER_INTERNAL_ERROR'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(32): warning C4005: 'DXGI_ERROR_NONEXCLUSIVE': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50263): note: see previous definition of 'DXGI_ERROR_NONEXCLUSIVE'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(33): warning C4005: 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50272): note: see previous definition of 'DXGI_ERROR_NOT_CURRENTLY_AVAILABLE'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(34): warning C4005: 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50282): note: see previous definition of 'DXGI_ERROR_REMOTE_CLIENT_DISCONNECTED'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\dxgitype.h(35): warning C4005: 'DXGI_ERROR_REMOTE_OUTOFMEMORY': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50291): note: see previous definition of 'DXGI_ERROR_REMOTE_OUTOFMEMORY'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(917): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50469): note: see previous definition of 'D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(918): warning C4005: 'D3D11_ERROR_FILE_NOT_FOUND': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50478): note: see previous definition of 'D3D11_ERROR_FILE_NOT_FOUND'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(919): warning C4005: 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50488): note: see previous definition of 'D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d11.h(920): warning C4005: 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50497): note: see previous definition of 'D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): warning C4005: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50445): note: see previous definition of 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'
+c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': macro redefinition
+  c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50454): note: see previous definition of 'D3D10_ERROR_FILE_NOT_FOUND'
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(553): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(963): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1057): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1094): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1179): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1195): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1210): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(941): warning C4101: 'posZ': unreferenced local variable
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(941): warning C4101: 'posY': unreferenced local variable
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(941): warning C4101: 'posX': unreferenced local variable
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  systemclass.cpp
+  main.cpp
+  Engine.vcxproj -> \\StuHome\HomeDrive5$\1605705\Desktop\CMP505\Source\Engine\Debug\Engine.exe
+  Engine.vcxproj -> \\StuHome\HomeDrive5$\1605705\Desktop\CMP505\Source\Engine\Debug\Engine.pdb (Full PDB)
