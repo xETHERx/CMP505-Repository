@@ -903,6 +903,7 @@ bool ApplicationClass::HandleInput(float frameTime)
 		m_win = false;
 		m_pos1->SetPosition(65, 0, 65);
 		m_pos2->SetPosition(65, 0, 57);
+		m_Position->SetPosition(50, 10, 50);
 	}
 	
 

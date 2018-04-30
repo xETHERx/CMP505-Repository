@@ -42,9 +42,9 @@ bool SkyPlaneClass::Initialize(ID3D11Device* device, WCHAR* textureFilename1, WC
 	m_brightness = 0.65f;
 
 	// Setup the cloud translation speed increments.
-	m_translationSpeed[0] = 0.0003f;   // First texture X translation speed.
+	m_translationSpeed[0] = 0.0005f;   // First texture X translation speed.
 	m_translationSpeed[1] = 0.0f;      // First texture Z translation speed.
-	m_translationSpeed[2] = 0.00015f;  // Second texture X translation speed.
+	m_translationSpeed[2] = 0.0002f;  // Second texture X translation speed.
 	m_translationSpeed[3] = 0.0f;      // Second texture Z translation speed.
 
 	// Initialize the texture translation values.

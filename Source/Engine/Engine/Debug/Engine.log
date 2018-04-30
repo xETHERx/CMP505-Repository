@@ -56,18 +56,14 @@ c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(608): w
 c:\program files (x86)\microsoft directx sdk (june 2010)\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': macro redefinition
   c:\program files (x86)\windows kits\8.1\include\shared\winerror.h(50454): note: see previous definition of 'D3D10_ERROR_FILE_NOT_FOUND'
 \\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(553): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(963): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1057): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1094): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1179): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1195): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1210): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(941): warning C4101: 'posZ': unreferenced local variable
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(941): warning C4101: 'posY': unreferenced local variable
-\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(941): warning C4101: 'posX': unreferenced local variable
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  systemclass.cpp
-  main.cpp
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(964): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1058): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1095): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1180): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1196): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(1211): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(942): warning C4101: 'posZ': unreferenced local variable
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(942): warning C4101: 'posY': unreferenced local variable
+\\stuhome\homedrive5$\1605705\desktop\cmp505\source\engine\engine\applicationclass.cpp(942): warning C4101: 'posX': unreferenced local variable
   Engine.vcxproj -> \\StuHome\HomeDrive5$\1605705\Desktop\CMP505\Source\Engine\Debug\Engine.exe
   Engine.vcxproj -> \\StuHome\HomeDrive5$\1605705\Desktop\CMP505\Source\Engine\Debug\Engine.pdb (Full PDB)
